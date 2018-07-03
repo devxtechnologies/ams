@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'main.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'flat_responsive',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

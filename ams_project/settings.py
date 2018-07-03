@@ -29,6 +29,7 @@ SECRET_KEY = '!!lq!yf1iy@5@fc1-w5#&-k*&!!l!hxcfmpvgolt6h-^l1u#(='
 DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'main.User'
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'main',
     'dashboard',
     'widget_tweaks',
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'ams_project.urls'

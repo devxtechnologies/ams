@@ -5,4 +5,4 @@ from .models import Attendance
 class SubjectSelectForm(forms.ModelForm):
 	class Meta:
 		model = Attendance
-		exclude = ('user',)
+		exclude = ('teacher', 'date_time',)

@@ -21,9 +21,8 @@ class MainView(FormView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(MainView, self).get_context_data(*args, **kwargs)
-		subject_list = Teaches.objects.filter(teacher=self.request.user)
-		self.request.session['subject_list'] = subject_list
-		self.request.session['date_time'] = datetime.datetime.now()
+		subject = Teaches.objects.get(teacher=self.request.user).pk
+		self.request.session['subject'] = subject
 		return context
 
 	def get(self, request, *args, **kwargs):

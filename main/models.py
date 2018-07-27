@@ -5,11 +5,10 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
 	'''
-	Used for teachers
+	Used for storing user details
 	'''
 	phone = models.CharField("Phone", max_length=15, null=True, blank=True)
 	subjects = models.ManyToManyField("subject", blank=True)
-	phone = models.CharField("Phone", max_length=20, null=True, blank=True)
 	email = models.EmailField("Email", max_length=250, null=True, blank=True)
 	sem = models.IntegerField("Semester", null=True, blank=True)
 	sec = models.CharField("Section", max_length=10, null=True, blank=True)

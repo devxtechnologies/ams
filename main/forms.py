@@ -7,8 +7,7 @@ class SubjectSelectForm(forms.ModelForm):
 		model = Attendance
 		exclude = ('teacher', 'date_time',)
 
-		def __init__(self, user, *args, **kwargs):
-			self.user = user
-			print(user)
-			super(SubjectSelectForm, self).__init__(user, *args, **kwargs)
-			self.fields['subject'].queryset = Teaches.objects.filter(teacher=user)
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user')
+		super(SubjectSelectForm, self).__init__(*args, **kwargs)
+		self.fields['subject'].queryset = Teaches.objects.filter(teacher=self.user)

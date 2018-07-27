@@ -12,19 +12,20 @@ import datetime
 
 class InitialView(FormView): 
 	'''
-	MainView: This view initialises the list of subjects available for the user and accepts 
+	InitialView: This view initialises the list of subjects available for the user and accepts 
 	the name of the subject that the attendance is being given for.
 	'''  
 	template_name = "initial.html"
 	form_class = SubjectSelectForm
 	success_url = reverse_lazy("home")
 
-	def get_context_data(self, *args, **kwargs):
-		context = super(InitialView, self).get_context_data(*args, **kwargs)
-		context['form'] = SubjectSelectForm(user=self.request.user)
-		return context
+	def get_form_kwargs(self):
+		kwargs = super(InitialView, self).get_form_kwargs()
+		kwargs.update({'user': self.request.user})
+		return kwargs
 
 	def post(self, request, *args, **kwargs):
+		self.request.session['subject_pk'] = request.POST.get('subject')
 		return redirect(reverse_lazy('main'))
 
 

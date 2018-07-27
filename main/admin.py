@@ -28,7 +28,7 @@ class UserAdmin(DjangoUserAdmin):
 
 @admin.register(Teaches)
 class TeachesAdmin(admin.ModelAdmin):
-	list_display = ('teachers_first_name','subject_name','semester','sec')
+	list_display = ('teachers_first_name','subject_name','sem','sec')
 	search_fields = ('teacher__first_name', 'subject__name', 'subject__code')
 	ordering = ('id',)
 

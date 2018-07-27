@@ -5,32 +5,13 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
 	'''
-	Used for teachers
+	Used for storing user details
 	'''
 	phone = models.CharField("Phone", max_length=15, null=True, blank=True)
 	subjects = models.ManyToManyField("subject", blank=True)
-
-
-class Student(models.Model):
-	'''
-	TODO://
-	'''
-	name = models.CharField("Name", max_length=250, null=True, blank=True)
-	phone = models.CharField("Phone", max_length=20, null=True, blank=True)
 	email = models.EmailField("Email", max_length=250, null=True, blank=True)
-
 	sem = models.IntegerField("Semester", null=True, blank=True)
 	sec = models.CharField("Section", max_length=10, null=True, blank=True)
-
-	subjects = models.ManyToManyField("subject", blank=True)
-# 	department = models.ForeignKey("Department", on_delete=models.CASCADE, null=True)
-# 	date_of_joining = models.DateField("Date of Joining", null=True, blank=True)
-# 	ug = models.BooleanField(default=False)
-# 	batch = models.CharField("Lab Batch", max_length=50, null=True, blank=True)
-# 	sub_batch = models.CharField("Lab Sub Batch", max_length=50, null=True, blank=True)
-	
-	def __str__(self):
-		return self.first_name
 
 
 class Subject(models.Model):
@@ -69,3 +50,21 @@ class Teaches(models.Model):
 
 	def __str__(self):
 		return self.teacher.first_name + ' -> '  + self.subject.name + '->' + self.sem + " " + self.sec
+
+
+class Attendance(models.Model):
+	'''
+	Attendance: Stores the list of students for whom attendance has to be taken
+	'''
+	teacher = models.ForeignKey('user')
+	date_time = models.DateTimeField(auto_now=False, auto_now_add=False)
+	subject = models.ForeignKey('subject')
+
+
+class Absentees(models.Model):
+	'''
+	Absentees: Stores the list of students who are absent
+	'''
+	name = models.ForeignKey('user')
+	attendance = models.ForeignKey('attendance')
+

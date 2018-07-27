@@ -26,18 +26,6 @@ class UserAdmin(DjangoUserAdmin):
 	ordering = ('username',)
 
 
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
-	'''
-		Admin View for Student
-	'''
-	list_display = ('name', 'sem', 'sec', 'phone')
-	search_fields = ('name', 'phone')
-
-	class Meta:
-		verbose_name = 'Student'
-
-
 @admin.register(Teaches)
 class TeachesAdmin(admin.ModelAdmin):
 	list_display = ('teachers_first_name','subject_name','semester','sec')

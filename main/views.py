@@ -10,7 +10,7 @@ from .forms import *
 import datetime
 # Create your views here.
 
-class MainView(FormView): 
+class InitialView(FormView): 
 	'''
 	MainView: This view initialises the list of subjects available for the user and accepts 
 	the name of the subject that the attendance is being given for.
@@ -20,19 +20,11 @@ class MainView(FormView):
 	success_url = reverse_lazy("home")
 
 	def get_context_data(self, *args, **kwargs):
-		context = super(MainView, self).get_context_data(*args, **kwargs)
-		subject = Teaches.objects.get(teacher=self.request.user).pk
-		self.request.session['subject'] = subject
+		context = super(InitialView, self).get_context_data(*args, **kwargs)
+		context['form'] = SubjectSelectForm(user=self.request.user)
 		return context
 
-	def get(self, request, *args, **kwargs):
-		context = self.get_context_data(**kwargs)
-		return render(request, self.template_name, context)
-
 	def post(self, request, *args, **kwargs):
-		create = forms.save(commit=False)
-		create.teacher = self.request.user
-		create.save()
 		return redirect(reverse_lazy('main'))
 
 

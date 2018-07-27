@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
  
 {% block title %}
     {% trans 'Login or register' %} | {{ block.super }}
@@ -8,32 +9,24 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-    
-        <h2 id="login">{% trans 'LOGIN' %}</h2>
-        <div class="col-sm-6 col-md-12 login_form">
-            <form style="margin-left: auto;margin-right:auto;" id="login_form" action="{{ request.get_full_path }}" method="post" class="well" >
-                {% csrf_token %}
-                {% include "partials/form_fields.html" with form=form %}
-                <div class="checkbox"><label><input type="checkbox"> Remeber me</label><a style="text-decoration: underline !important;" id="forgot_pass" href="">{% trans "Forgot password?" %}</a></div>
-                <button name="login_submit" type="submit" value="Sign In" class="btn btn-lg btn-primary login-btn" data-loading-text="{% trans "Logging in..." %}">{% trans 'SIGN IN' %}</button>
-                <hr>
-                Need an account? <a id="register_link" href="{% url "registration_register" %}">Register</a>
-            </form>
-            <div style="text-align:center;" id="social_profiles">
-                <p>Signin with social profiles</p>
-                <i class="fa fa-facebook social_profiles1"></i>
-                <i class="fa fa-google social_profiles2"></i>
-            </div>
-        <!-- 
-        <div class="col-sm-6 register_form">
-            <form id="register_form" action="{{ request.get_full_path }}" method="post" class="well">
-                <h2>{% trans 'Register' %}</h2>
-                {% csrf_token %}
-                {% include "partials/form_fields.html" with form=registration_form %}
-                <button name="registration_submit" type="submit" value="Register" class="btn btn-lg btn-primary" data-loading-text="{% trans 'Registering...' %}">{% trans 'Register' %}</button>
-            </form>
-        </div>
-    -->
-    </div>
+<center>
+    <div class="container">
+        <h1 style="padding:2%;font-size:1.5em;">Attendance Management System</h1>
+      <div id="login">
+        <form action="javascript:void(0);" method="get">
 
+          <fieldset class="clearfix">
+
+            <p><span class="fontawesome-user"></span><input id="id_username" type="text" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" name="username" required></p> 
+            <p><span class="fontawesome-lock"></span><input id="id_password" type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" name="password" required></p> 
+            <p><input type="submit" value="Sign In"></p>
+
+          </fieldset>
+
+        </form>
+
+      </div> <!-- end login -->
+
+    </div>
+</center>
 {% endblock %}

@@ -14,13 +14,13 @@
     <div class="container">
         <h1 style="padding:2%;font-size:1.5em;">Attendance Management System</h1>
       <div id="login">
-        <form action="javascript:void(0);" method="get">
+        <form method="post">{% csrf_token %}
 
           <fieldset class="clearfix">
 
             <p><span class="fontawesome-user"></span><input id="id_username" type="text" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" name="username" required></p> 
             <p><span class="fontawesome-lock"></span><input id="id_password" type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" name="password" required></p> 
-            <p><input type="submit" value="Sign In"></p>
+            <p><input type="submit" id="submit" value="Sign In"></p>
 
           </fieldset>
 

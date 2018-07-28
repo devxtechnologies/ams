@@ -8,18 +8,17 @@
 <div class="container container-initial">
 	<div id="login" class="mx-auto">
 		<div class="pb-4">
-			<p class="date d-inline pr-5 font-big">Date : </p>
-			<p class="time d-inline font-big">Time : </p>
+			<p class="d-inline pr-5 font-big">Date : <span class="date"></span></p>
+			<p class="d-inline font-big">Time : <span class="time"></span></p>
 		</div>
 		<form method="post" id="initial-form">{% csrf_token %}
 
           	<fieldset class="clearfix">
-
-            <div class="form-group col-sm-12 col-md-12">
-				<label class="white pb-2" for="subject">Subject:</label>
-				{% render_field form.subject class="form-control" %}
-			</div>
-          </fieldset>
+	            <div class="form-group col-sm-12 col-md-12">
+					<label class="white pb-2" for="subject">Subject:</label>
+					{% render_field form.subject class="form-control" %}
+				</div>
+          	</fieldset>
 
         </form>
 
@@ -76,19 +75,31 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
-$(function() {
-	var d = new Date();
 
-	var month = d.getMonth()+1;
-	var day = d.getDate();
+<script type="text/javascript">
+	setInterval(function() {
+
+	var currentTime = new Date();
+	var hours = currentTime.getHours();
+	var minutes = currentTime.getMinutes();
+	var seconds = currentTime.getSeconds();
+	var month = currentTime.getMonth()+1;
+	var day = currentTime.getDate();
 
 	var output = ((''+day).length<2 ? '0' : '') + day + '/' +
-	    ((''+month).length<2 ? '0' : '') + month + '/' + d.getFullYear();
+	    ((''+month).length<2 ? '0' : '') + month + '/' + currentTime.getFullYear();
 
-	    $('.date').append(output);
-	    $('.time').append(d.getHours() + ":" + d.getMinutes());
-	})
+	    $('.date').html(output);
+  // Add leading zeros
+  hours = (hours < 10 ? "0" : "") + hours;
+  minutes = (minutes < 10 ? "0" : "") + minutes;
+  seconds = (seconds < 10 ? "0" : "") + seconds;
+
+  // Compose the string for display
+  var currentTimeString = hours + ":" + minutes + ":" + seconds;
+  $(".time").html(currentTimeString);
+
+}, 1000);
 </script>
 <script>
 $(function() {

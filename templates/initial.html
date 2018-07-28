@@ -1,5 +1,111 @@
-<form method="post">
-	{% csrf_token %}
-	{{ form.as_p}}
-	<input type="submit" name="submit">
-</form>
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet">
+<div class="container container-initial">
+	<div id="login" class="mx-auto">
+		<div class="pb-4">
+			<p class="d-inline pr-5 font-big">Date : <span class="date"></span></p>
+			<p class="d-inline font-big">Time : <span class="time"></span></p>
+		</div>
+		<form method="post" id="initial-form">{% csrf_token %}
+
+          	<fieldset class="clearfix">
+	            <div class="form-group col-sm-12 col-md-12">
+					<label class="white pb-2" for="subject">Subject:</label>
+					{% render_field form.subject class="form-control" %}
+				</div>
+          	</fieldset>
+
+        </form>
+
+      </div>
+	</div>
+
+{% endblock %}
+{% block script %}
+
+{{ super }}
+<script>
+$(function() {
+    if (screen.width < 355) {
+    	$('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+    }
+})
+</script>
+<script>
+$( window ).resize(function() {
+    if (screen.width < 355) {
+        $('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+    }
+    else {
+        $('th:nth-child(1)').show();
+        $('td:nth-child(1)').show();
+    }
+    if(screen.width < 509) {
+    	$('#hide').hide();
+    }
+    else {
+    	$('#hide').show();
+    }
+    if(screen.width < 761) {
+    	$('table').addClass('table-bordered');
+    	$('#details_pc').addClass('d-none');
+    	$('#details_mob').removeClass('d-none');
+
+    }
+    else {
+    	$('table').removeClass('table-bordered');	
+    	$('#details_pc').removeClass('d-none');
+    	$('#details_mob').addClass('d-none');
+    }
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('.table tr').click(function(event) {
+        if (event.target.type !== 'checkbox') {
+            $(':checkbox', this).trigger('click');
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+	setInterval(function() {
+
+	var currentTime = new Date();
+	var hours = currentTime.getHours();
+	var minutes = currentTime.getMinutes();
+	var seconds = currentTime.getSeconds();
+	var month = currentTime.getMonth()+1;
+	var day = currentTime.getDate();
+
+	var output = ((''+day).length<2 ? '0' : '') + day + '/' +
+	    ((''+month).length<2 ? '0' : '') + month + '/' + currentTime.getFullYear();
+
+	    $('.date').html(output);
+  // Add leading zeros
+  hours = (hours < 10 ? "0" : "") + hours;
+  minutes = (minutes < 10 ? "0" : "") + minutes;
+  seconds = (seconds < 10 ? "0" : "") + seconds;
+
+  // Compose the string for display
+  var currentTimeString = hours + ":" + minutes + ":" + seconds;
+  $(".time").html(currentTimeString);
+
+}, 1000);
+</script>
+<script>
+$(function() {
+	$('#id_subject').change(function() {
+		$('#initial-form').submit();
+	})
+})
+</script>
+{% endblock %}

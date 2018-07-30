@@ -6,4 +6,5 @@ from django.conf import settings
 from . import views
 urlpatterns = [
 	url(r'^$', views.DashboardView.as_view(), name='dashboard'),
+	url(r'^log$', views.LogView.as_view(), name='log'),
 ]

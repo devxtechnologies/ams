@@ -9,7 +9,7 @@ class UserAdmin(DjangoUserAdmin):
 
 	fieldsets = (
 		(None, {'fields': ('username', 'email', 'password')}),
-		(('Personal info'), {'fields': ('first_name', 'last_name', 'phone',)}),
+		(('Personal info'), {'fields': ('first_name', 'last_name', 'phone','subjects',)}),
 		(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
 									   'groups', 'user_permissions')}),
 		(('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -50,3 +50,6 @@ class SubjectAdmin(admin.ModelAdmin):
 	list_display = ('name', 'code', 'theory', 'elective',)
 	search_fields = ('name', 'code',)
 	ordering = ('name',)
+
+admin.site.register(Absentees)
+admin.site.register(Attendance)

@@ -3,6 +3,15 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+class UserType(models.Model):
+	'''
+	UserType: 	
+	'''
+	name = models.CharField("Type of User", max_length=50)
+
+	def __str__(self):
+		return self.name
+
 class User(AbstractUser):
 	'''
 	Used for storing user details
@@ -12,6 +21,7 @@ class User(AbstractUser):
 	email = models.EmailField("Email", max_length=250, null=True, blank=True)
 	sem = models.IntegerField("Semester", null=True, blank=True)
 	sec = models.CharField("Section", max_length=10, null=True, blank=True)
+	user_type = models.ManyToManyField('UserType')
 
 
 class Subject(models.Model):
@@ -56,15 +66,21 @@ class Attendance(models.Model):
 	'''
 	Attendance: Stores the list of students for whom attendance has to be taken
 	'''
-	teacher = models.ForeignKey('user')
-	date_time = models.DateTimeField(auto_now=False, auto_now_add=False)
-	subject = models.ForeignKey('subject')
+	date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+	teaches = models.ForeignKey('teaches', null=True)
+
+	def __str__(self):
+		return f'{self.teaches.teacher.first_name} -> {self.date_time}'
 
 
 class Absentees(models.Model):
 	'''
 	Absentees: Stores the list of students who are absent
 	'''
-	name = models.ForeignKey('user')
+	user = models.ForeignKey('user')
 	attendance = models.ForeignKey('attendance')
+
+	def __str__(self):
+		return self.user.first_name
+	
 

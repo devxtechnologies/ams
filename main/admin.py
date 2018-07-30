@@ -12,6 +12,7 @@ class UserAdmin(DjangoUserAdmin):
 		(('Personal info'), {'fields': ('first_name', 'last_name', 'phone','subjects',)}),
 		(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
 									   'groups', 'user_permissions')}),
+		(('Student Information'), {'fields': ('sem', 'sec')}),
 		(('Important dates'), {'fields': ('last_login', 'date_joined')}),
 	)
 	add_fieldsets = (

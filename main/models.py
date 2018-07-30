@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import signals
 
 # Create your models here.
 
@@ -82,5 +83,25 @@ class Absentees(models.Model):
 
 	def __str__(self):
 		return self.user.first_name
-	
+
+	def create_status(self, user, status):
+		detail = f'{self.name} is marked {status}'
+		ChangeStatus.objects.create(
+				user=user,
+				attendance=attendance,
+				detail=detail,
+			)
+
+
+class ChangeStatus(models.Model):
+	'''
+	Stores the details of when the attendance is changed, by whom and to what
+	'''
+	user = models.ForeignKey('user')
+	datetime = models.DateTimeField(auto_now_add=True)
+	attendance = models.ForeignKey('attendance')
+	detail = models.TextField()
+
+	def __str__(self):
+		return f'{self.user} changed {self.detail} at {self.datetime}'
 

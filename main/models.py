@@ -19,7 +19,7 @@ class User(AbstractUser):
 	phone = models.CharField("Phone", max_length=15, null=True, blank=True)
 	subjects = models.ManyToManyField("subject", blank=True)
 	email = models.EmailField("Email", max_length=250, null=True, blank=True)
-	sem = models.IntegerField("Semester", null=True, blank=True)
+	sem = models.CharField("Semester", null=True, blank=True, max_length=50)
 	sec = models.CharField("Section", max_length=10, null=True, blank=True)
 	user_type = models.ManyToManyField('UserType')
 

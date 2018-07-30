@@ -34,7 +34,7 @@ class AttendanceView(View):
 		context = {}
 		teaches_pk = self.request.session.get('teaches_pk')
 		teaches = Teaches.objects.get(pk=teaches_pk)
-		student_list = User.objects.filter(subjects=teaches.subject)
+		student_list = User.objects.filter(subjects=teaches.subject, sem=teaches.sem, sec=teaches.sec)
 		context['student_list'] = student_list
 		context['sem'] = teaches.sem
 		context['teacher_name'] = teaches.teacher.first_name

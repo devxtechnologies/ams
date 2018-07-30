@@ -32,68 +32,64 @@
 						<h5>Data Upload</h5>
 					</div>
 				</div>
-				<a href="{% url 'log' %}">
+				<a href="{% url 'report' %}">
 					<div class="col-md-3 col-sm-3 col-xs-6">
 						<div class="dashboard-div-wrapper bk-clr-four">
 							<i  class="fa fa-list-alt dashboard-div-icon" ></i>
-							<h5>Logs</h5>
+							<h5>Report</h5>
 						</div>
 					</div>
 				</a>
 			</div>
 		   
-			<div class="row">
-				<div class="col-md-6">
-					  <div class="notice-board">
+			<div style="width:70%; margin:0 auto; padding:0;" class="row">
+				<div class="col-md-12">
+				  	<div class="notice-board">
 						<div class="panel panel-default">
 							<div class="panel-heading activity">
-						   		Graph 1
+						   		Active  Notice Panel 
 								<div class="pull-right" >
 									<div class="dropdown">
-									  	<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+										<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 											<span class="glyphicon glyphicon-cog"></span>
 											<span class="caret"></span>
-									  	</button>
-									  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+										</button>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
 											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
-									  	</ul>
+										</ul>
 									</div>
 								</div>
 							</div>
 							<div class="panel-body">
-							   
+								<ul>
+								 	<li>
+									 	<span class="glyphicon glyphicon-align-left text-success" ></span> 
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									 	<span class="label label-warning" > Just now </span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-info-sign text-danger" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-info" > 2 min chat</span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-comment  text-warning" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >GO ! </span>
+									</li>
+									<li>
+									 	<span class="glyphicon glyphicon-edit  text-danger" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >Let's have it </span>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<hr />
-				</div>
-				<div class="col-md-6">
-					<div class="notice-board">
-						<div class="panel panel-default">
-							<div class="panel-heading activity">
-						   		Graph 2
-								<div class="pull-right" >
-									<div class="dropdown">
-									  	<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-											<span class="glyphicon glyphicon-cog"></span>
-											<span class="caret"></span>
-									  	</button>
-									  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
-											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
-									  	</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel-body">
-							   
-							</div>
-						</div>
-					</div>
-					<hr />
+					<hr/>
 				</div>
 			</div>
 		</div>
 	</div>
-{% endblock %} 
+{% endblock %}

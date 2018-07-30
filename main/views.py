@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, View
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 from .forms import *
@@ -8,7 +9,8 @@ from .forms import *
 import datetime
 # Create your views here.
 
-class InitialView(FormView): 
+
+class InitialView(LoginRequiredMixin, FormView): 
 	'''
 	InitialView: This view initialises the list of subjects available for the user and accepts 
 	the name of the subject that the attendance is being given for.
@@ -26,8 +28,8 @@ class InitialView(FormView):
 		self.request.session['teaches_pk'] = request.POST.get('teaches')
 		return redirect(reverse_lazy('attendance'))
 
-
-class AttendanceView(View):
+  
+class AttendanceView(LoginRequiredMixin, View):
 	template_name = "attendance.html"
 
 	def get(self, request, *args, **kwargs):

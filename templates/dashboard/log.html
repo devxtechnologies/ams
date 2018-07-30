@@ -1,0 +1,95 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+	<div class="content-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="page-head-line">Dashboard</h4>
+				</div>
+			</div>
+			<div class="row">
+				<a href="{% url 'dashboard' %}">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="dashboard-div-wrapper bk-clr-one">
+							<i class="fa fa-table dashboard-div-icon" ></i>
+							<h5>Home</h5>
+						</div>
+					</div>
+				</a>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="dashboard-div-wrapper bk-clr-two">
+						<i class="fa fa-edit dashboard-div-icon" ></i>
+						<h5>Edit/Change</h5>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="dashboard-div-wrapper bk-clr-three">
+						<i class="fa fa-upload dashboard-div-icon" ></i>
+						<h5>Data Upload</h5>
+					</div>
+				</div>
+				<a href="{% url 'report' %}">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="dashboard-div-wrapper bk-clr-four">
+							<i  class="fa fa-list-alt dashboard-div-icon" ></i>
+							<h5>Report</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+		   
+			<div style="width:70%; margin:0 auto; padding:0;" class="row">
+				<div class="col-md-12">
+				  	<div class="notice-board">
+						<div class="panel panel-default">
+							<div class="panel-heading activity">
+						   		Active  Notice Panel 
+								<div class="pull-right" >
+									<div class="dropdown">
+										<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+											<span class="glyphicon glyphicon-cog"></span>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<ul>
+								 	<li>
+									 	<span class="glyphicon glyphicon-align-left text-success" ></span> 
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									 	<span class="label label-warning" > Just now </span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-info-sign text-danger" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-info" > 2 min chat</span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-comment  text-warning" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >GO ! </span>
+									</li>
+									<li>
+									 	<span class="glyphicon glyphicon-edit  text-danger" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >Let's have it </span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<hr/>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

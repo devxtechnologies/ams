@@ -20,3 +20,16 @@ class LogView(LoginRequiredMixin, TemplateView):
 	    context = super(LogView, self).get_context_data(**kwargs)
 
 	    return context
+
+
+class ReportView(LoginRequiredMixin, TemplateView):
+	'''
+	This is to show all the changes that have been made to the existing
+	attendance.
+	'''
+	template_name = "dashboard/report.html"
+
+	def get_context_data(self, **kwargs):
+	    context = super(ReportView, self).get_context_data(**kwargs)
+
+	    return context

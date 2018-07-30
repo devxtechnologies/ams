@@ -32,10 +32,10 @@
 <div style="margin-top:3%;" class="container">
 	<div id="details_pc" class="row">
 		<div class="col">
-			<p>Teacher:</p>
+			<p>Teacher:{{ teacher_name }}</p>
 		</div>
 		<div class="col">
-			<p>Class: </p>
+			<p>Class: {{ sem }}</p>
 		</div>
 		<div class="col">
 			<p>Hour: </p>
@@ -43,17 +43,17 @@
 	</div>
 	<div id="details_mob" class="d-none">
 		<div>
-			<p>Teacher:</p>
+			<p>Teacher:{{ teacher_name }}</p>
 		</div>
 		<div>
-			<p>Class: </p>
+			<p>Class: {{ sem }}</p>
 		</div>
 		<div>
 			<p>Hour: </p>
 		</div>
 	</div>
 	<div class="card p-5">
-		<form>
+		<form method="POST">{% csrf_token %}
 			<table style="overflow-x:auto;max-width:100%;" class="table table-gray">
 		    	<thead>
 		      		<tr class="text-center">
@@ -63,27 +63,15 @@
 			      	</tr>
 				</thead>
 				<tbody>
-			      	<tr class="text-center">
-				        <td>1353251325asfasfasfasfasfasfafas</td>
-				        <td>Aayush nandkeolyar asfsafasfasfasfasfasfasfasfafasNandu</td>
-			        	<td>
-			        		<div style="text-align:center;" class="checkbox"><input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something"></div>
-			        	</td>
-			      	</tr>
-			      	<tr class="text-center">
-				        <td>Mary</td>
-				        <td>Moe</td>
-				        <td>
-			        		<div style="text-align:center;" class="checkbox"><input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something"></div>
-			        	</td>
-			      	</tr>
-			      	<tr class="text-center">
-				        <td>July</td>
-				        <td>Dooley</td>
-				        <td>
-			        		<div style="text-align:center;" class="checkbox"><input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something"></div>
-			        	</td>
-			      	</tr>
+					{% for i in student_list %}
+				      	<tr class="text-center">
+					        <td>{{ i.username }}</td>
+					        <td>{{ i.first_name }}</td>
+				        	<td>
+				        		<div style="text-align:center;" class="checkbox"><input type="checkbox" class="form-check-input" id="check2" name="student" value="{{i.username}}"></div>
+				        	</td>
+				      	</tr>
+			      	{% endfor %}
 		    	</tbody>
 		  	</table>
 		  	<input type="submit" class="btn submit-btn float-right" value="Submit">

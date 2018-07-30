@@ -16,7 +16,7 @@
           	<fieldset class="clearfix">
 	            <div class="form-group col-sm-12 col-md-12">
 					<label class="white pb-2" for="subject">Subject:</label>
-					{% render_field form.subject class="form-control" %}
+					{% render_field form.teaches class="form-control" %}
 				</div>
           	</fieldset>
 
@@ -103,7 +103,7 @@ $(document).ready(function() {
 </script>
 <script>
 $(function() {
-	$('#id_subject').change(function() {
+	$('#id_teaches').change(function() {
 		$('#initial-form').submit();
 	})
 })

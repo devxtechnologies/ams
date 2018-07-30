@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Report</h2>
+  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        {% for i in attendance %}
+        <th>{{ i.date_time }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for j in student %}
+      <p>1 {{j.subjects}}</p>
+      <p>2 {{i.subject}}</p>
+      {% if j.subjects ==  i.subject %}
+      <tr>
+        <td>{{ j.username }}</td>
+        <td> {% if j in absentee.i %} ABSENT {% else %} PRESENT {% endif%}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

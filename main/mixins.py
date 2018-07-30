@@ -23,9 +23,7 @@ class SendSMSMixin(object):
 		if number is None:
 			number = self.get_number()
 		params = { 'numbers' : number, 'message' : msg }
-		print(self.url)
 		r = requests.get(self.url + ap.urlencode(params))
-		print(r.json())
 
 
 

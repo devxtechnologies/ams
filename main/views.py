@@ -47,7 +47,6 @@ class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
 
 	def get_msg(self, name, klass):
 		msg = f'Your ward {name} was absent for the class {klass}.'
-		print(msg)
 		return msg
 
 	def post(self, request, *args, **kwargs):

@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 from .forms import *
+from .mixins import SendSMSMixin
 
 import datetime
 # Create your views here.
@@ -29,8 +30,9 @@ class InitialView(LoginRequiredMixin, FormView):
 		return redirect(reverse_lazy('attendance'))
 
   
-class AttendanceView(LoginRequiredMixin, View):
+class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
 	template_name = "attendance.html"
+	url = 'https://api.textlocal.in/send/?username=nandkeolyar.aayush@gmail.com&hash=19dd5bfe0649f20c9fa6e742b873a77c9bd18ea14368fc4e52914b4e8add2ab6&sender=TBMSCL&'
 
 	def get(self, request, *args, **kwargs):
 		context = {}
@@ -43,6 +45,10 @@ class AttendanceView(LoginRequiredMixin, View):
 
 		return render(self.request, self.template_name, context)
 
+	def get_msg(self, name, klass):
+		msg = f'Your ward {name} was absent for the class {klass}.'
+		return msg
+
 	def post(self, request, *args, **kwargs):
 		teaches = Teaches.objects.get(pk=self.request.session.get('teaches_pk'))
 		attendance = Attendance.objects.create(teaches=teaches)
@@ -50,5 +56,7 @@ class AttendanceView(LoginRequiredMixin, View):
 		for i in student:
 			user = User.objects.get(username=i)
 			Absentees.objects.create(user=user, attendance=attendance)
+			msg = self.get_msg(user.first_name, teaches.subject)
+			self.send_msg(user.phone, msg)
 		return redirect(reverse_lazy('initial'))
 

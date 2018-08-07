@@ -22,7 +22,11 @@ class User(AbstractUser):
 	email = models.EmailField("Email", max_length=250, null=True, blank=True)
 	sem = models.CharField("Semester", null=True, blank=True, max_length=50)
 	sec = models.CharField("Section", max_length=10, null=True, blank=True)
+	department = models.ForeignKey('department', null=True, blank=True)
 	user_type = models.ManyToManyField('UserType')
+	father = models.CharField("Father's Name", max_length=50, null=True, blank=True)
+	mother = models.CharField("Mother's Name", max_length=50, null=True, blank=True)
+	phone_parent = models.CharField("Parent's Phone Number", max_length=50, null=True, blank=True)
 
 
 class Subject(models.Model):
@@ -51,7 +55,7 @@ class Teaches(models.Model):
 
 	sem = models.CharField("Student's Semester", max_length=50)
 	sec = models.CharField("Student's Section", max_length=50)
-# 	department = models.ForeignKey('department')
+	department = models.ForeignKey('department', null=True)
 
 # 	batch = models.CharField("Student's Batch", max_length=50, null=True, blank=True)
 # 	sub_batch = models.CharField("Student's sub batch", max_length=50, null=True, blank=True)
@@ -60,8 +64,16 @@ class Teaches(models.Model):
 	count = models.IntegerField("Student Count", default=0, null=True, blank=True)
 
 	def __str__(self):
-		return self.teacher.first_name + ' -> '  + self.subject.name + '->' + self.sem + " " + self.sec
+		return self.teacher.department + ' -> '  + self.subject.name + ' -> ' + self.sem + " " + self.sec
 
+class Department(models.Model):
+	'''
+	Department
+	'''
+	name = models.CharField("Department Name", max_length=50)
+
+	def __str__(self):
+		return self.name
 
 class Attendance(models.Model):
 	'''

@@ -32,24 +32,30 @@
 <div style="margin-top:3%;" class="container">
 	<div id="details_pc" class="row">
 		<div class="col">
-			<p>Teacher:{{ teacher_name }}</p>
+			<p>Teacher: {{ teaches.teacher.first_name }}</p>
 		</div>
 		<div class="col">
-			<p>Class: {{ sem }}</p>
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
 		</div>
 		<div class="col">
-			<p>Hour: </p>
+			<p>Date: <span class="date"></span></p>
+		</div>
+		<div class="col">
+			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
 	<div id="details_mob" class="d-none">
 		<div>
-			<p>Teacher:{{ teacher_name }}</p>
+			<p>Teacher:{{ teaches.teacher. }}</p>
 		</div>
 		<div>
-			<p>Class: {{ sem }}</p>
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
+		</div>
+		<div class="col">
+			<p>Date: <span class="date"></span></p>
 		</div>
 		<div>
-			<p>Hour: </p>
+			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
 	<div class="card p-5">
@@ -57,24 +63,28 @@
 			<table style="overflow-x:auto;max-width:100%;" class="table table-gray">
 		    	<thead>
 		      		<tr class="text-center">
-		        		<th>Registration No.</th>
-				        <th>Name</th>
-				        <th>Absent <span id="hide" style="font-size:0.8em;color:#999;">(mark if absent)</span></th>
+		        		<th style="width:20%;">Sr. No.</th>
+				        <th style="width:50%;">Name</th>
+				        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;color:#999;">(mark if absent)</span></th>
 			      	</tr>
 				</thead>
 				<tbody>
 					{% for i in student_list %}
 				      	<tr class="text-center">
-					        <td>{{ i.username }}</td>
-					        <td>{{ i.first_name }}</td>
-				        	<td>
+					        <td style="width:20%;">{{ forloop.counter }}</td>
+					        <td style="width:50%">{{ i.first_name }}</td>
+				        	<td style="width:30%;">
 				        		<div style="text-align:center;" class="checkbox"><input type="checkbox" class="form-check-input" id="check2" name="student" value="{{i.username}}"></div>
 				        	</td>
 				      	</tr>
-			      	{% endfor %}
+			      	{% empty %}
+				      	<tr id="oops">
+				      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
+				      	</tr>
+		      		{% endfor %}
 		    	</tbody>
 		  	</table>
-		  	<input type="submit" class="btn submit-btn float-right" value="Submit">
+		  	<input id="submit" type="submit" class="btn submit-btn float-right" value="Submit">
 	  	</form>
   	</div>
 </div>
@@ -83,22 +93,31 @@
 
 {{ super }}
 <script>
+if($('#oops').length > 0) {
+	$('#submit').attr('disabled', 'true');
+	$('#submit').css('cursor', 'not-allowed');
+}
+</script>
+<script>
 $(function() {
-    if (screen.width < 355) {
+    if (screen.width < 509) {
     	$('th:nth-child(1)').hide();
         $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
     }
 })
 </script>
 <script>
 $( window ).resize(function() {
-    if (screen.width < 355) {
+    if (screen.width < 509) {
         $('th:nth-child(1)').hide();
         $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
     }
     else {
         $('th:nth-child(1)').show();
         $('td:nth-child(1)').show();
+        $('.card').removeAttr('style');
     }
     if(screen.width < 509) {
     	$('#hide').hide();

@@ -112,7 +112,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="panel-body">
+							<div id="mDiv" class="panel-body">
 
 							</div>
 						</div>
@@ -138,7 +138,7 @@
 								</div>
 							</div>
 							<div class="panel-body">
-							   
+							   {{attendance_list}}
 							</div>
 						</div>
 					</div>
@@ -147,4 +147,38 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block script %}
+<script>
+var data = [{
+  values: [16, 15, 12, 6, 5, 4, 42],
+  labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World' ],
+  domain: {
+    x: [0, .48]
+  },
+  name: 'GHG Emissions',
+  hoverinfo: 'label+percent+name',
+  hole: .4,
+  type: 'pie'
+}];
+
+var layout = {
+  annotations: [
+    {
+      font: {
+        size: 20
+      },
+      showarrow: false,
+      text: 'GHG',
+      x: 0.17,
+      y: 0.5
+    }
+  ],
+  height: 600,
+  width: 600
+};
+
+Plotly.newPlot('myDiv', data, layout);
+</script>
 {% endblock %}

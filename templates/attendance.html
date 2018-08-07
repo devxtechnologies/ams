@@ -31,24 +31,30 @@
 <div style="margin-top:3%;" class="container">
 	<div id="details_pc" class="row">
 		<div class="col">
-			<p>Teacher:{{ teacher_name }}</p>
+			<p>Teacher: {{ teaches.teacher.first_name }}</p>
 		</div>
 		<div class="col">
-			<p>Class: {{ sem }}</p>
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
 		</div>
 		<div class="col">
-			<p>Hour: </p>
+			<p>Date: <span class="date"></span></p>
+		</div>
+		<div class="col">
+			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
 	<div id="details_mob" class="d-none">
 		<div>
-			<p>Teacher:{{ teacher_name }}</p>
+			<p>Teacher:{{ teaches.teacher.first_name }}</p>
 		</div>
 		<div>
-			<p>Class: {{ sem }}</p>
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
+		</div>
+		<div class="col">
+			<p>Date: <span class="date"></span></p>
 		</div>
 		<div>
-			<p>Hour: </p>
+			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
 		<form style="margin-bottom:15%;" method="POST">{% csrf_token %}
@@ -57,7 +63,7 @@
 					<table class="table table-gray fixed-header">
 				    	<thead>
 				      		<tr class="text-center">
-				        		<th>Registration No.</th>
+				        		<th>Sr. No.</th>
 						        <th>Name</th>
 						        <th>Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
 						        <input id="main_radio" type="checkbox" onClick="toggle(this)">
@@ -71,9 +77,13 @@
 						<tbody>
 							{% for i in student_list %}
 						      	<tr class="text-center row100 body">
-							        <td>{{ i.username }}</td>
+							        <td>{{ forloop.counter }}</td>
 							        <td>{{ i.first_name }}</td>
 						        	<td><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
+						      	</tr>
+					      	{% empty %}
+						      	<tr id="oops">
+						      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
 						      	</tr>
 					      	{% endfor %}
 				    	</tbody>
@@ -88,22 +98,31 @@
 
 {{ super }}
 <script>
+if($('#oops').length > 0) {
+	$('#submit').attr('disabled', 'true');
+	$('#submit').css('cursor', 'not-allowed');
+}
+</script>
+<script>
 $(function() {
-    if (screen.width < 355) {
+    if (screen.width < 509) {
     	$('th:nth-child(1)').hide();
         $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
     }
 })
 </script>
 <script>
 $( window ).resize(function() {
-    if (screen.width < 355) {
+    if (screen.width < 509) {
         $('th:nth-child(1)').hide();
         $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
     }
     else {
         $('th:nth-child(1)').show();
         $('td:nth-child(1)').show();
+        $('.card').removeAttr('style');
     }
     if(screen.width < 509) {
     	$('#hide').hide();

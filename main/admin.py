@@ -1,18 +1,21 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from import_export.admin import ImportExportModelAdmin
+
 from .models import *
 
 # Register your models here.
 
 @admin.register(User)
-class UserAdmin(DjangoUserAdmin):
+class UserAdmin(ImportExportModelAdmin):
 
 	fieldsets = (
 		(None, {'fields': ('username', 'email', 'password')}),
 		(('Personal info'), {'fields': ('first_name', 'last_name', 'phone','subjects',)}),
 		(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
 									   'groups', 'user_permissions')}),
-		(('Student Information'), {'fields': ('sem', 'sec')}),
+		(('Student Information'), {'fields': ('sem', 'sec', 'department')}),
+		(('Parent Information'), {'fields': ('father', 'mother', 'phone_parent')}),
 		(('Important dates'), {'fields': ('last_login', 'date_joined')}),
 	)
 	add_fieldsets = (
@@ -47,10 +50,11 @@ class TeachesAdmin(admin.ModelAdmin):
 
 
 @admin.register(Subject)
-class SubjectAdmin(admin.ModelAdmin):
+class SubjectAdmin(ImportExportModelAdmin):
 	list_display = ('name', 'code', 'theory', 'elective',)
 	search_fields = ('name', 'code',)
 	ordering = ('name',)
 
+admin.site.register(Department)
 admin.site.register(Absentees)
 admin.site.register(Attendance)

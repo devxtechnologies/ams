@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'main',
     'dashboard',
     'widget_tweaks',
+    'import_export',
 ]
 
 MIDDLEWARE = [

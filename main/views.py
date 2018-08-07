@@ -38,10 +38,9 @@ class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
 		context = {}
 		teaches_pk = self.request.session.get('teaches_pk')
 		teaches = Teaches.objects.get(pk=teaches_pk)
-		student_list = User.objects.filter(subjects=teaches.subject, sem=teaches.sem, sec=teaches.sec)
+		student_list = User.objects.filter(subjects__in=[teaches.subject,], sem=teaches.sem, sec=teaches.sec, department=teaches.department)
 		context['student_list'] = student_list
-		context['sem'] = teaches.sem
-		context['teacher_name'] = teaches.teacher.first_name
+		context['teaches'] = teaches
 
 		return render(self.request, self.template_name, context)
 

@@ -17,7 +17,20 @@
         <form method="post">{% csrf_token %}
 
           <fieldset class="clearfix">
-
+            {% if form.errors %}
+              {% for field in form %}
+                  {% for error in field.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                  {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+            {% endif %}
             <p><span class="fontawesome-user"></span><input id="id_username" type="text" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" name="username" required></p> 
             <p><span class="fontawesome-lock"></span><input id="id_password" type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" name="password" required></p> 
             <p><input type="submit" id="submit" value="Sign In"></p>

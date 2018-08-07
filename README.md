@@ -32,6 +32,18 @@ This application represents attendance management system.
 
 ## CHANGELOG
 
+
+### 1.0 (Beta) - 26/JULY/2018
+
+#### Added
+* Department model
+* Main JS file
+
+#### Changed
+* User Model
+* Teaches Model
+* Minor UI
+
 ### 1.0 (Beta) - 26/JULY/2018
 
 #### Added

@@ -33,6 +33,15 @@ This application represents attendance management system.
 ## CHANGELOG
 
 
+### 1.0 - 07/AUG/2018
+
+#### Added
+* Color inversion toggle switch
+* LocalStorage
+* Moved to BitBucket
+* Select all button in attendance main
+
+
 ### 1.1 (Beta) - 07/AUG/2018
 
 #### Added

@@ -32,6 +32,14 @@ This application represents attendance management system.
 
 ## CHANGELOG
 
+### 1.1 - 07/AUG/2018
+
+#### Added
+* Favicon added
+* Bug Fixes
+* Login page errors
+* Login/Logout URLs
+
 
 ### 1.0 - 07/AUG/2018
 

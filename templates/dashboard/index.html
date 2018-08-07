@@ -1,0 +1,184 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+	<div class="content-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="page-head-line">Dashboard</h4>
+				</div>
+			</div>
+			<div class="row">
+				<a href="{% url 'log' %}">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="dashboard-div-wrapper bk-clr-one">
+							<i class="fa fa-table dashboard-div-icon" ></i>
+							<h5>Logs</h5>
+						</div>
+					</div>
+				</a>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="dashboard-div-wrapper bk-clr-two">
+						<i class="fa fa-edit dashboard-div-icon" ></i>
+						<h5>Edit/Change</h5>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="dashboard-div-wrapper bk-clr-three">
+						<i class="fa fa-upload dashboard-div-icon" ></i>
+						<h5>Data Upload</h5>
+					</div>
+				</div>
+				<a href="{% url 'report' %}">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="dashboard-div-wrapper bk-clr-four">
+							<i  class="fa fa-list-alt dashboard-div-icon" ></i>
+							<h5>Report</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+		   
+			<div style="width:70%; margin:0 auto; padding:0;" class="row">
+				<div class="col-md-12">
+					  <div class="notice-board">
+						<div class="panel panel-default">
+							<div class="panel-heading activity">
+						   		Active  Notice Panel 
+								<div class="pull-right" >
+									<div class="dropdown">
+										<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+											<span class="glyphicon glyphicon-cog"></span>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<ul>
+								 	<li>
+									 	<span class="glyphicon glyphicon-align-left text-success" ></span> 
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									 	<span class="label label-warning" > Just now </span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-info-sign text-danger" ></span>  
+									  	Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-info" > 2 min chat</span>
+									</li>
+								 	<li>
+									 	<span class="glyphicon glyphicon-comment  text-warning" ></span>  
+											  Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >GO ! </span>
+									</li>
+									<li>
+									 	<span class="glyphicon glyphicon-edit  text-danger" ></span>  
+										  Lorem ipsum dolor sit amet ipsum dolor sit amet
+									  	<span class="label label-success" >Let's have it </span>
+									</li>
+								</ul>
+							</div>
+							<div class="panel-footer">
+								<a href="{% url 'log' %}" class="btn btn-default btn-block">View More</a>
+							</div>
+						</div>
+					</div>
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					  <div class="notice-board">
+						<div class="panel panel-default">
+							<div class="panel-heading activity">
+						   	Graph 1
+								<div class="pull-right" >
+									<div class="dropdown">
+									  	<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+											<span class="glyphicon glyphicon-cog"></span>
+											<span class="caret"></span>
+									  	</button>
+									  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+									  	</ul>
+									</div>
+								</div>
+							</div>
+							<div id="mDiv" class="panel-body">
+
+							</div>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="col-md-6">
+					<div class="notice-board">
+						<div class="panel panel-default">
+							<div class="panel-heading activity">
+						   	Graph 2
+								<div class="pull-right" >
+									<div class="dropdown">
+									  	<button class="btn submit-btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+											<span class="glyphicon glyphicon-cog"></span>
+											<span class="caret"></span>
+									  </button>
+									  	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+									  	</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+							   {{attendance_list}}
+							</div>
+						</div>
+					</div>
+					<hr />
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+<script>
+var data = [{
+  values: [16, 15, 12, 6, 5, 4, 42],
+  labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World' ],
+  domain: {
+    x: [0, .48]
+  },
+  name: 'GHG Emissions',
+  hoverinfo: 'label+percent+name',
+  hole: .4,
+  type: 'pie'
+}];
+
+var layout = {
+  annotations: [
+    {
+      font: {
+        size: 20
+      },
+      showarrow: false,
+      text: 'GHG',
+      x: 0.17,
+      y: 0.5
+    }
+  ],
+  height: 600,
+  width: 600
+};
+
+Plotly.newPlot('myDiv', data, layout);
+</script>
+{% endblock %}

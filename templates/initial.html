@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet">
+<div class="container container-initial">
+	<div id="login" class="mx-auto">
+		<div class="pb-4">
+			<p class="d-inline pr-5 font-big">Date : <span class="date"></span></p>
+			<p class="d-inline font-big">Time : <span class="time"></span></p>
+		</div>
+		<form method="post" id="initial-form">{% csrf_token %}
+
+          	<fieldset class="clearfix">
+	            <div class="form-group col-sm-12 col-md-12">
+					<label class="white pb-2" for="subject">Subject:</label>
+					{% render_field form.teaches class="form-control" %}
+				</div>
+          	</fieldset>
+
+        </form>
+
+      </div>
+	</div>
+
+{% endblock %}
+{% block script %}
+
+{{ super }}
+<script>
+$(function() {
+    if (screen.width < 355) {
+    	$('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+    }
+})
+</script>
+<script>
+$( window ).resize(function() {
+    if (screen.width < 355) {
+        $('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+    }
+    else {
+        $('th:nth-child(1)').show();
+        $('td:nth-child(1)').show();
+    }
+    if(screen.width < 509) {
+    	$('#hide').hide();
+    }
+    else {
+    	$('#hide').show();
+    }
+    if(screen.width < 761) {
+    	$('table').addClass('table-bordered');
+    	$('#details_pc').addClass('d-none');
+    	$('#details_mob').removeClass('d-none');
+
+    }
+    else {
+    	$('table').removeClass('table-bordered');	
+    	$('#details_pc').removeClass('d-none');
+    	$('#details_mob').addClass('d-none');
+    }
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('.table tr').click(function(event) {
+        if (event.target.type !== 'checkbox') {
+            $(':checkbox', this).trigger('click');
+        }
+    });
+});
+</script>
+<script>
+$(function() {
+	$('#id_teaches').change(function() {
+		$('#initial-form').submit();
+	})
+})
+</script>
+{% endblock %}

@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+<nav style="width:100%;" class="navbar navbar-expand-md navbar-dark">
+  	<a class="navbar-brand" href="#">AMS</a>
+  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+  	</button>
+  	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav ml-auto">
+			<li>
+			</li>
+			<li class="nav-item">
+				<a href="{% url 'auth_logout' %}" class="nav-link">
+					Logout
+				</a>
+			</li>
+		</ul>
+  	</div> 
+</nav>
+<div class="float-right p-2">
+  	<label class="switch navbar-nav">
+		<input id="cmn-toggle-4" type="checkbox">
+		<span class="slider round"></span>
+	</label>
+</div>
+<div style="margin-top:3%;" class="container">
+	<div id="details_pc" class="row">
+		<div class="col">
+			<p>Teacher: {{ teaches.teacher.first_name }}</p>
+		</div>
+		<div class="col">
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
+		</div>
+		<div class="col">
+			<p>Date: <span class="date"></span></p>
+		</div>
+		<div class="col">
+			<p>Hour: <span class="time"></span></p>
+		</div>
+	</div>
+	<div id="details_mob" class="d-none">
+		<div>
+			<p>Teacher:{{ teaches.teacher.first_name }}</p>
+		</div>
+		<div>
+			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
+		</div>
+		<div class="col">
+			<p>Date: <span class="date"></span></p>
+		</div>
+		<div>
+			<p>Hour: <span class="time"></span></p>
+		</div>
+	</div>
+		<form style="margin-bottom:15%;" method="POST">{% csrf_token %}
+			<div class="table100 ver3 m-b-110">
+				<div class="table100-head">
+					<table class="table table-gray fixed-header">
+				    	<thead>
+				      		<tr class="text-center">
+				        		<th>Sr. No.</th>
+						        <th>Name</th>
+						        <th>Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
+						        <input id="main_radio" type="checkbox" onClick="toggle(this)">
+						        </th>
+					      	</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table100-body js-pscroll">
+					<table style="width:100%;">
+						<tbody>
+							{% for i in student_list %}
+						      	<tr class="text-center row100 body">
+							        <td>{{ forloop.counter }}</td>
+							        <td>{{ i.first_name }}</td>
+						        	<td><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
+						      	</tr>
+					      	{% empty %}
+						      	<tr id="oops">
+						      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
+						      	</tr>
+					      	{% endfor %}
+				    	</tbody>
+			    	</table>	
+			    </div>
+		  	</div>
+		  	<input type="submit" class="btn submit-btn float-right mt-4" value="Submit">
+	  	</form>
+</div>
+{% endblock %}
+{% block script %}
+
+{{ super }}
+<script>
+if($('#oops').length > 0) {
+	$('#submit').attr('disabled', 'true');
+	$('#submit').css('cursor', 'not-allowed');
+}
+</script>
+<script>
+$(function() {
+    if (screen.width < 509) {
+    	$('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
+    }
+})
+</script>
+<script>
+$( window ).resize(function() {
+    if (screen.width < 509) {
+        $('th:nth-child(1)').hide();
+        $('td:nth-child(1)').hide();
+        $('.card').attr('style', 'padding:0px !important;');
+    }
+    else {
+        $('th:nth-child(1)').show();
+        $('td:nth-child(1)').show();
+        $('.card').removeAttr('style');
+    }
+    if(screen.width < 509) {
+    	$('#hide').hide();
+    }
+    else {
+    	$('#hide').show();
+    }
+    if(screen.width < 761) {
+    	$('table').addClass('table-bordered');
+    	$('#details_pc').addClass('d-none');
+    	$('#details_mob').removeClass('d-none');
+
+    }
+    else {
+    	$('table').removeClass('table-bordered');	
+    	$('#details_pc').removeClass('d-none');
+    	$('#details_mob').addClass('d-none');
+    }
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('.table tr').click(function(event) {
+        if (event.target.type !== 'checkbox') {
+            $(':checkbox', this).trigger('click');
+        }
+    });
+});
+</script>
+<script>
+function toggle(source) {
+	$('.orm-check-input').each(function(){
+		if($(this).prop('checked')==true){
+  			$(this).prop('checked', false);
+  		}
+  		else {
+  			$(this).prop('checked', true);
+  		}
+  	})
+}
+</script>
+<script type="text/javascript">
+	if(window.localStorage.length == 0) {
+        localStorage.setItem("checked", 'false');
+    }
+	var checked = localStorage.getItem('checked');
+	if(checked == 'true') {
+		$('#cmn-toggle-4').prop('checked', true);
+		$('th').each(function() {
+    		$(this).css('background-color', 'white')
+    	})
+    	$('td').each(function() {
+			$(this).css('background-color', 'white')
+			$(this).css('color', 'black');
+		})
+	}
+	else if(checked == 'false') {
+		$('#cmn-toggle-4').prop('checked', false);
+		$('th').each(function() {
+    		$(this).css('background-color', '#2c3338')
+    	})	
+    	$('td').each(function() {
+    		$(this).css('background-color', '#2c3338')
+    		$(this).css('color', 'white');
+    	})
+	}
+	$('#cmn-toggle-4').change(function(){
+	    if(this.checked) {
+	    	localStorage.setItem("checked", 'true');
+	    	$('th').each(function() {
+	    		$(this).css('background-color', 'white')
+	    	})
+	    	$('td').each(function() {
+	    		$(this).css('background-color', 'white')
+	    		$(this).css('color', 'black');
+	    	})
+	    }
+	    else {
+	    	localStorage.setItem("checked", 'false');
+	    	$('th').each(function() {
+	    		$(this).css('background-color', '#2c3338')
+	    	})
+	    	$('td').each(function() {
+	    		$(this).css('background-color', '#2c3338')
+	    		$(this).css('color', 'white');
+	    	})
+	    }
+	});
+</script>
+{% endblock %}

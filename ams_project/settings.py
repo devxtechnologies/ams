@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,6 +35,7 @@ AUTH_USER_MODEL = 'main.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'flat_responsive',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'dashboard',
+    'widget_tweaks',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +84,12 @@ WSGI_APPLICATION = 'ams_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'attendance',
+        'USER': 'devx',
+        'PASSWORD': 'ams123321',
+        'HOST': '206.189.134.84',
+        'PORT': '',
     }
 }
 
@@ -122,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 #Media files
 MEDIA_URL = '/media/'

@@ -33,7 +33,7 @@ This application represents attendance management system.
 ## CHANGELOG
 
 
-### 1.0 (Beta) - 26/JULY/2018
+### 1.1 (Beta) - 07/AUG/2018
 
 #### Added
 * Department model

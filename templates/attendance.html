@@ -28,7 +28,10 @@
 		</ul>
   	</div>  
 </nav>
-
+<div class="switch">
+  <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
+  <label for="cmn-toggle-4"></label>
+</div>
 <div style="margin-top:3%;" class="container">
 	<div id="details_pc" class="row">
 		<div class="col">
@@ -59,7 +62,9 @@
 		      		<tr class="text-center">
 		        		<th>Registration No.</th>
 				        <th>Name</th>
-				        <th>Absent <span id="hide" style="font-size:0.8em;color:#999;">(mark if absent)</span></th>
+				        <th>Absent <span id="hide" style="font-size:0.8em;color:#999;">(mark if absent)</span>
+				        <input id="main_radio" type="checkbox" onClick="toggle(this)">
+				        </th>
 			      	</tr>
 				</thead>
 				<tbody>
@@ -127,5 +132,17 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<script>
+function toggle(source) {
+	$('.form-check-input').each(function(){
+		if($(this).prop('checked')==true){
+  			$(this).prop('checked', false);
+  		}
+  		else {
+  			$(this).prop('checked', true);
+  		}
+  	})
+}
 </script>
 {% endblock %}

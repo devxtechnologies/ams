@@ -3,6 +3,13 @@
 
 This application represents attendance management system.
 
+## Setup
+
+
+1. [Local Environment Setup](#local-environment-setup)
+2. [Runnig The Application](#running-the-application)
+3. [Changelog](#changelog)
+
 ## Local environment setup
 
 ### Create a virtual environment

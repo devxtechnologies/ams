@@ -1,7 +1,7 @@
 # Attendance Management System
 
 
-This application represents attendance management system built for BMSCL.
+This application represents attendance management system.
 
 ## Local environment setup
 

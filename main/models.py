@@ -64,7 +64,7 @@ class Teaches(models.Model):
 	count = models.IntegerField("Student Count", default=0, null=True, blank=True)
 
 	def __str__(self):
-		return self.teacher.department + ' -> '  + self.subject.name + ' -> ' + self.sem + " " + self.sec
+		return self.department.name + ' -> '  + self.subject.name + ' -> ' + self.sem + " " + self.sec
 
 class Department(models.Model):
 	'''

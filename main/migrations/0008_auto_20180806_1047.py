@@ -8,34 +8,45 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0007_merge_20180730_0958'),
-    ]
+    dependencies = [("main", "0007_merge_20180730_0958")]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='father',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name="Father's Name"),
+            model_name="user",
+            name="father",
+            field=models.CharField(
+                blank=True, max_length=50, null=True, verbose_name="Father's Name"
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='mother',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name="Mother's Name"),
+            model_name="user",
+            name="mother",
+            field=models.CharField(
+                blank=True, max_length=50, null=True, verbose_name="Mother's Name"
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='phone_parent',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name="Parent's Phone Number"),
+            model_name="user",
+            name="phone_parent",
+            field=models.CharField(
+                blank=True,
+                max_length=50,
+                null=True,
+                verbose_name="Parent's Phone Number",
+            ),
         ),
         migrations.AlterField(
-            model_name='absentees',
-            name='attendance',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Attendance'),
+            model_name="absentees",
+            name="attendance",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="main.Attendance"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='sem',
-            field=models.CharField(blank=True, max_length=50, null=True, verbose_name='Semester'),
+            model_name="user",
+            name="sem",
+            field=models.CharField(
+                blank=True, max_length=50, null=True, verbose_name="Semester"
+            ),
         ),
     ]

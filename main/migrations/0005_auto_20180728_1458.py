@@ -8,14 +8,16 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0004_changestatus'),
-    ]
+    dependencies = [("main", "0004_changestatus")]
 
     operations = [
         migrations.AlterField(
-            model_name='absentees',
-            name='attendance',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='absentee', to='main.Attendance'),
-        ),
+            model_name="absentees",
+            name="attendance",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="absentee",
+                to="main.Attendance",
+            ),
+        )
     ]

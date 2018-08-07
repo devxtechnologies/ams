@@ -9,19 +9,37 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0003_auto_20180727_0929'),
-    ]
+    dependencies = [("main", "0003_auto_20180727_0929")]
 
     operations = [
         migrations.CreateModel(
-            name='ChangeStatus',
+            name="ChangeStatus",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(auto_now_add=True)),
-                ('detail', models.TextField()),
-                ('attendance', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Attendance')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("datetime", models.DateTimeField(auto_now_add=True)),
+                ("detail", models.TextField()),
+                (
+                    "attendance",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="main.Attendance",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-        ),
+        )
     ]

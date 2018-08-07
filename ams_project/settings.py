@@ -58,6 +58,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_REDIRECT_URL = '/attendance'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
 ROOT_URLCONF = 'ams_project.urls'
 
 TEMPLATES = [

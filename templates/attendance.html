@@ -63,9 +63,9 @@
 					<table class="table table-gray fixed-header">
 				    	<thead>
 				      		<tr class="text-center">
-				        		<th>Sr. No.</th>
-						        <th>Name</th>
-						        <th>Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
+				        		<th style="width:20%;">Sr. No.</th>
+						        <th style="width:50%;">Name</th>
+						        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
 						        <input id="main_radio" type="checkbox" onClick="toggle(this)">
 						        </th>
 					      	</tr>
@@ -77,9 +77,9 @@
 						<tbody>
 							{% for i in student_list %}
 						      	<tr class="text-center row100 body">
-							        <td>{{ forloop.counter }}</td>
-							        <td>{{ i.first_name }}</td>
-						        	<td><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
+							        <td style="width:20%;">{{ forloop.counter }}</td>
+							        <td style="width:50%;">{{ i.first_name }}</td>
+						        	<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
 						      	</tr>
 					      	{% empty %}
 						      	<tr id="oops">

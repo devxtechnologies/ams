@@ -57,7 +57,7 @@
 			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
-		<form style="margin-bottom:15%;" method="POST">{% csrf_token %}
+		<form id="main_form" style="margin-bottom:15%;" method="POST">{% csrf_token %}
 			<div class="table100 ver3 m-b-110">
 				<div class="table100-head">
 					<table class="table table-gray fixed-header">
@@ -76,7 +76,7 @@
 					<table style="width:100%;">
 						<tbody>
 							{% for i in student_list %}
-						      	<tr class="text-center row100 body">
+						      	<tr class="text-center row100 body trigger">
 							        <td style="width:20%;">{{ forloop.counter }}</td>
 							        <td style="width:50%;">{{ i.first_name }}</td>
 						        	<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
@@ -145,7 +145,7 @@ $( window ).resize(function() {
 </script>
 <script>
 $(document).ready(function() {
-    $('.table tr').click(function(event) {
+    $('.trigger').click(function(event) {
         if (event.target.type !== 'checkbox') {
             $(':checkbox', this).trigger('click');
         }

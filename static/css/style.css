@@ -292,3 +292,15 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+@media(max-width:761px) {
+  #main_form {
+    margin-bottom:25% !important;
+  }
+}
+
+@media(max-width:400px) {
+  #main_form {
+    margin-bottom:35% !important;
+  }
+}

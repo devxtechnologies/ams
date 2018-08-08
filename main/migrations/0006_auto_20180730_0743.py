@@ -8,22 +8,18 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0005_auto_20180730_0735'),
-    ]
+    dependencies = [("main", "0005_auto_20180730_0735")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='attendance',
-            name='subject',
-        ),
-        migrations.RemoveField(
-            model_name='attendance',
-            name='teacher',
-        ),
+        migrations.RemoveField(model_name="attendance", name="subject"),
+        migrations.RemoveField(model_name="attendance", name="teacher"),
         migrations.AddField(
-            model_name='attendance',
-            name='teaches',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='main.Teaches'),
+            model_name="attendance",
+            name="teaches",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="main.Teaches",
+            ),
         ),
     ]

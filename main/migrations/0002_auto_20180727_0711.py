@@ -9,65 +9,91 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0001_initial'),
-    ]
+    dependencies = [("main", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='Absentees',
+            name="Absentees",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                )
             ],
         ),
         migrations.CreateModel(
-            name='Attendance',
+            name="Attendance",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_time', models.DateTimeField()),
-                ('subject', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Subject')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_time", models.DateTimeField()),
+                (
+                    "subject",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.Subject"
+                    ),
+                ),
             ],
         ),
-        migrations.RemoveField(
-            model_name='student',
-            name='subjects',
+        migrations.RemoveField(model_name="student", name="subjects"),
+        migrations.AddField(
+            model_name="user",
+            name="sec",
+            field=models.CharField(
+                blank=True, max_length=10, null=True, verbose_name="Section"
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='sec',
-            field=models.CharField(blank=True, max_length=10, null=True, verbose_name='Section'),
-        ),
-        migrations.AddField(
-            model_name='user',
-            name='sem',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Semester'),
+            model_name="user",
+            name="sem",
+            field=models.IntegerField(blank=True, null=True, verbose_name="Semester"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(blank=True, max_length=250, null=True, verbose_name='Email'),
+            model_name="user",
+            name="email",
+            field=models.EmailField(
+                blank=True, max_length=250, null=True, verbose_name="Email"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='phone',
-            field=models.CharField(blank=True, max_length=20, null=True, verbose_name='Phone'),
+            model_name="user",
+            name="phone",
+            field=models.CharField(
+                blank=True, max_length=20, null=True, verbose_name="Phone"
+            ),
         ),
-        migrations.DeleteModel(
-            name='Student',
+        migrations.DeleteModel(name="Student"),
+        migrations.AddField(
+            model_name="attendance",
+            name="teacher",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AddField(
-            model_name='attendance',
-            name='teacher',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="absentees",
+            name="attendance",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="main.Attendance"
+            ),
         ),
         migrations.AddField(
-            model_name='absentees',
-            name='attendance',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Attendance'),
-        ),
-        migrations.AddField(
-            model_name='absentees',
-            name='name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="absentees",
+            name="name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

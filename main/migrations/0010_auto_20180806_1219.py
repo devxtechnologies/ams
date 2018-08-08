@@ -8,19 +8,26 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0009_department'),
-    ]
+    dependencies = [("main", "0009_department")]
 
     operations = [
         migrations.AddField(
-            model_name='teaches',
-            name='department',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='main.Department'),
+            model_name="teaches",
+            name="department",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="main.Department",
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='department',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='main.Department'),
+            model_name="user",
+            name="department",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="main.Department",
+            ),
         ),
     ]

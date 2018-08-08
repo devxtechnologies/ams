@@ -7,26 +7,34 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0002_auto_20180727_0711'),
-    ]
+    dependencies = [("main", "0002_auto_20180727_0711")]
 
     operations = [
         migrations.CreateModel(
-            name='UserType',
+            name="UserType",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Type of User')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50, verbose_name="Type of User")),
             ],
         ),
         migrations.AlterField(
-            model_name='user',
-            name='phone',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='Phone'),
+            model_name="user",
+            name="phone",
+            field=models.CharField(
+                blank=True, max_length=15, null=True, verbose_name="Phone"
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='user_type',
-            field=models.ManyToManyField(to='main.UserType'),
+            model_name="user",
+            name="user_type",
+            field=models.ManyToManyField(to="main.UserType"),
         ),
     ]

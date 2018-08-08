@@ -7,19 +7,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('main', '0004_merge_20180730_0728'),
-    ]
+    dependencies = [("main", "0004_merge_20180730_0728")]
 
     operations = [
         migrations.RenameField(
-            model_name='absentees',
-            old_name='name',
-            new_name='user',
+            model_name="absentees", old_name="name", new_name="user"
         ),
         migrations.AlterField(
-            model_name='attendance',
-            name='date_time',
+            model_name="attendance",
+            name="date_time",
             field=models.DateTimeField(auto_now=True),
         ),
     ]

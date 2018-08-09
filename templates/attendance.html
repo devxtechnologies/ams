@@ -57,7 +57,49 @@
 			<p>Hour: <span class="time"></span></p>
 		</div>
 	</div>
-		<form id="main_form" style="margin-bottom:15%;" method="POST">{% csrf_token %}
+		<div class="table100 ver3 m-b-110">
+			<div class="table100-head">
+				<table class="table table-gray fixed-header">
+			    	<thead>
+			      		<tr class="text-center">
+			        		<th style="width:20%;">Sr. No.</th>
+					        <th style="width:50%;">Name</th>
+					        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
+					        <input id="main_radio" type="checkbox" onClick="toggle(this)">
+					        </th>
+				      	</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="table100-body js-pscroll">
+				<table style="width:100%;">
+					<tbody>
+						{% for i in student_list %}
+					      	<tr class="text-center row100 body trigger">
+						        <td style="width:20%;">{{ forloop.counter }}</td>
+						        <td style="width:50%;">{{ i.first_name }}</td>
+					        	<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
+					      	</tr>
+				      	{% empty %}
+					      	<tr id="oops">
+					      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
+					      	</tr>
+				      	{% endfor %}
+			    	</tbody>
+		    	</table>	
+		    </div>
+	    </div>
+	  	<input style="margin-bottom:10%;" type="button" class="btn submit-btn float-right mt-4" value="Submit" data-toggle="modal" data-target="#myModal" id="submit">
+</div>
+<div class="modal" id="myModal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+		        <h4 class="modal-title">Absentees</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      		</div>
+      		<div class="modal-body">
+    		<form id="main_form" style="margin-bottom:15%;" method="POST">{% csrf_token %}
 			<div class="table100 ver3 m-b-110">
 				<div class="table100-head">
 					<table class="table table-gray fixed-header">
@@ -66,37 +108,47 @@
 				        		<th style="width:20%;">Sr. No.</th>
 						        <th style="width:50%;">Name</th>
 						        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
-						        <input id="main_radio" type="checkbox" onClick="toggle(this)">
+						        <input id="main_radio_modal" type="checkbox" onClick="toggle_modal(this)" checked>
 						        </th>
 					      	</tr>
 						</thead>
 					</table>
 				</div>
 				<div class="table100-body js-pscroll">
-					<table style="width:100%;">
-						<tbody>
-							{% for i in student_list %}
-						      	<tr class="text-center row100 body trigger">
-							        <td style="width:20%;">{{ forloop.counter }}</td>
-							        <td style="width:50%;">{{ i.first_name }}</td>
-						        	<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
-						      	</tr>
-					      	{% empty %}
-						      	<tr id="oops">
-						      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
-						      	</tr>
-					      	{% endfor %}
+					<table style="width:100%;margin-top:5%;">
+						<tbody class="modal-table">
+							
 				    	</tbody>
 			    	</table>	
 			    </div>
 		  	</div>
 		  	<input type="submit" class="btn submit-btn float-right mt-4" value="Submit">
 	  	</form>
+
+      		</div>
+		</div>
+  	</div>
 </div>
 {% endblock %}
 {% block script %}
 
 {{ super }}
+<script type="text/javascript">
+$('.submit-btn').click(function() {
+	$('.modal-table').html('');
+	$('.trigger').each(function() {
+		i = 0;
+		$(this).find('td').each(function() {
+			i++;
+			if(i == 3) {
+				if($(this).children().children().prop('checked')==true){
+		  			$('.modal-table').append($(this).parent().clone());
+		  		}
+			}
+		}); 
+	})
+})
+</script>
 <script>
 if($('#oops').length > 0) {
 	$('#submit').attr('disabled', 'true');
@@ -154,14 +206,29 @@ $(document).ready(function() {
 </script>
 <script>
 function toggle(source) {
-	$('.orm-check-input').each(function(){
-		if($(this).prop('checked')==true){
-  			$(this).prop('checked', false);
-  		}
-  		else {
+	if ($('#main_radio').prop('checked')==true) {
+		$('.modal_checkbox').each(function(){
   			$(this).prop('checked', true);
-  		}
-  	})
+	  	})
+	}
+	else {
+		$('.modal_checkbox').each(function(){
+  			$(this).prop('checked', false);
+	  	})
+	}
+}
+
+function toggle_modal(source) {
+	if ($('#main_radio_modal').prop('checked')==true) {
+		$('.orm-check-input').each(function(){
+  			$(this).prop('checked', true);
+	  	})
+	}
+	else {
+		$('.orm-check-input').each(function(){
+  			$(this).prop('checked', false);
+	  	})
+	}
 }
 </script>
 <script type="text/javascript">

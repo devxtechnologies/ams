@@ -29,7 +29,7 @@ SECRET_KEY = '!!lq!yf1iy@5@fc1-w5#&-k*&!!l!hxcfmpvgolt6h-^l1u#(='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'main.User'
 # Application definition
@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'attendance',
         'USER': 'devx',
         'PASSWORD': 'ams123321',
-        'HOST': '206.189.134.84',
+        'HOST': '159.65.157.134',
         'PORT': '',
     }
 }

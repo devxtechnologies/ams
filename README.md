@@ -32,6 +32,12 @@ This application represents attendance management system.
 
 ## CHANGELOG
 
+### 1.2 - (pending)
+
+#### Added
+* Absentee confirm model
+
+
 ### 1.1 - 07/AUG/2018
 
 #### Added

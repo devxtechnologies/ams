@@ -157,6 +157,26 @@ $('.submit-btn').click(function() {
     }
     $('.count').html(count);
 })
+$(document).on('show.bs.modal', '#myModal', function (e) {
+    $('.modal-body').each(function() {
+    	$(this).find('tr').each(function() {
+    		$(this).children().children().children().addClass('modal-checkbox')
+    	})
+    })
+    $('.modal-checkbox').each(function() {
+    	count = parseInt($('.count').html());
+    	$(this).change(function() {
+    		if($(this).prop('checked') == false) {
+    			$('.count').html(count - 1);
+    			count = parseInt($('.count').html())
+    		}
+    		else {
+    			$('.count').html(count + 1);
+    			count = parseInt($('.count').html())	
+    		}
+    	})
+    })
+});
 </script>
 <script>
 if($('#oops').length > 0) {
@@ -229,7 +249,7 @@ function toggle(source) {
 </script>
 <script type="text/javascript">
 	if(window.localStorage.length == 0) {
-        localStorage.setItem("checked", 'false');
+        localStorage.setItem("checked", 'true');
     }
 	var checked = localStorage.getItem('checked');
 	if(checked == 'true') {

@@ -116,14 +116,13 @@
 				<div class="table100-body js-pscroll">
 					<table style="width:100%;margin-top:5%;">
 						<tbody class="modal-table">
-							
 				    	</tbody>
-			    	</table>	
+			    	</table>
 			    </div>
 		  	</div>
 		  	<input type="submit" class="btn submit-btn float-right mt-4" value="Submit">
 	  	</form>
-
+	  		<span>Total absentee: <span class="count"></span></span>
       		</div>
 		</div>
   	</div>
@@ -134,19 +133,27 @@
 {{ super }}
 <script type="text/javascript">
 $('.submit-btn').click(function() {
-	$('.modal-table').html('');
-	$('.trigger').each(function() {
-		i = 0;
-		$(this).find('td').each(function() {
-			i++;
-			if(i == 3) {
-				if($(this).children().children().prop('checked')==true){
-					$(this).children().children().removeClass('trigger');
-		  			$('.modal-table').append($(this).parent().clone());
-		  		}
-			}
-		}); 
-	})
+    $('.modal-table').html('');
+    var empty = true;
+    var count = 0;
+    $('.trigger').each(function() {
+        i = 0;
+        $(this).find('td').each(function() {
+            i++;
+            if (i == 3) {
+                if ($(this).children().children().prop('checked') == true) {
+                    empty = false;
+                    count++;
+                    $(this).children().children().removeClass('trigger');
+                    $('.modal-table').append($(this).parent().clone());
+                }
+            }
+        });
+    })
+    if (empty) {
+        $('.modal-table').append("<h3 class='text-info' align='center'>No absentee :-)</h3>");
+    }
+    $('.count').html(count);
 })
 </script>
 <script>

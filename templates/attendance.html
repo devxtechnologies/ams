@@ -6,11 +6,11 @@
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
 <nav style="width:100%;" class="navbar navbar-expand-md navbar-dark">
-  	<a class="navbar-brand" href="#">AMS</a>
-  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		<span class="navbar-toggler-icon"></span>
-  	</button>
-  	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+	<a class="navbar-brand" href="#">AMS</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav ml-auto">
 			<li>
 			</li>
@@ -20,10 +20,10 @@
 				</a>
 			</li>
 		</ul>
-  	</div> 
+	</div>
 </nav>
 <div class="float-right p-2">
-  	<label class="switch navbar-nav">
+	<label class="switch navbar-nav">
 		<input id="cmn-toggle-4" type="checkbox">
 		<span class="slider round"></span>
 	</label>
@@ -44,88 +44,90 @@
 		</div>
 	</div>
 	<div id="details_mob" class="d-none">
-		<div>
-			<p>Teacher:{{ teaches.teacher.first_name }}</p>
-		</div>
-		<div>
-			<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
-		</div>
-		<div class="col">
-			<p>Date: <span class="date"></span></p>
-		</div>
-		<div>
-			<p>Hour: <span class="time"></span></p>
+		<div class="row">
+			<div class="col">
+				<p>Teacher:{{ teaches.teacher.first_name }}</p>
+			</div>
+			<div class="col">
+				<p>Class: {{ teaches.sem }} {{ teaches.sec }}</p>
+			</div>
+			<div class="col">
+				<p>Date: <span class="date"></span></p>
+			</div>
+			<div class="col">
+				<p>Hour: <span class="time"></span></p>
+			</div>
 		</div>
 	</div>
-		<div class="table100 ver3 m-b-110">
-			<div class="table100-head">
-				<table class="table table-gray fixed-header">
-			    	<thead>
-			      		<tr class="text-center">
-			        		<th style="width:20%;">Sr. No.</th>
-					        <th style="width:50%;">Name</th>
-					        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
-					        <input id="main_radio" type="checkbox" onClick="toggle(this)">
-					        </th>
-				      	</tr>
-					</thead>
-				</table>
-			</div>
-			<div class="table100-body js-pscroll">
-				<table style="width:100%;">
-					<tbody>
-						{% for i in student_list %}
-					      	<tr class="text-center row100 body trigger">
-						        <td style="width:20%;">{{ forloop.counter }}</td>
-						        <td style="width:50%;">{{ i.first_name }}</td>
-					        	<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
-					      	</tr>
-				      	{% empty %}
-					      	<tr id="oops">
-					      		<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
-					      	</tr>
-				      	{% endfor %}
-			    	</tbody>
-		    	</table>	
-		    </div>
-	    </div>
-	  	<input style="margin-bottom:10%;" type="button" class="btn submit-btn float-right mt-4" value="Submit" data-toggle="modal" data-target="#myModal" id="submit">
+	<div class="table100 ver3 m-b-110">
+		<div class="table100-head">
+			<table class="table table-gray fixed-header">
+				<thead>
+					<tr class="text-center">
+						<th style="width:20%;">Sr. No.</th>
+						<th style="width:50%;">Name</th>
+						<th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
+						<input id="main_radio" type="checkbox" onClick="toggle(this)">
+					</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="table100-body js-pscroll">
+		<table style="width:100%;">
+			<tbody>
+				{% for i in student_list %}
+					<tr class="text-center row100 body trigger">
+						<td style="width:20%;">{{ forloop.counter }}</td>
+						<td style="width:50%;">{{ i.first_name }}</td>
+						<td style="width:30%;"><div style="text-align:center;" class="checkbox"><input type="checkbox" class="orm-check-input" id="check2" name="student" value="{{i.username}}"></div></td>
+					</tr>
+					{% empty %}
+					<tr id="oops">
+						<span class="text-danger"> Oops! Something went wrong. Please contact your IT support.</span>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<input style="margin-bottom:10%;" type="button" class="btn submit-btn float-right mt-4" value="Submit" data-toggle="modal" data-target="#myModal" id="submit">
 </div>
 <div class="modal" id="myModal">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
-		        <h4 class="modal-title">Absentees</h4>
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      		</div>
-      		<div class="modal-body">
-    		<form id="main_form" style="margin-bottom:15%;" method="POST">{% csrf_token %}
-			<div class="table100 ver3 m-b-110">
-				<div class="table100-head">
-					<table class="table table-gray fixed-header">
-				    	<thead>
-				      		<tr class="text-center">
-				        		<th style="width:20%;">Sr. No.</th>
-						        <th style="width:50%;">Name</th>
-						        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
-						        </th>
-					      	</tr>
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title">Absentees</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body">
+			<form id="main_form" style="margin-bottom:15%;" method="POST">{% csrf_token %}
+				<div class="table100 ver3 m-b-110">
+					<div class="table100-head">
+						<table class="table table-gray fixed-header">
+							<thead>
+								<tr class="text-center">
+									<th style="width:20%;">Sr. No.</th>
+									<th style="width:50%;">Name</th>
+									<th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
+								</th>
+							</tr>
 						</thead>
 					</table>
 				</div>
 				<div class="table100-body js-pscroll">
 					<table style="width:100%;margin-top:5%;">
 						<tbody class="modal-table">
-				    	</tbody>
-			    	</table>
-			    </div>
-		  	</div>
-		  	<input type="submit" class="btn submit-btn float-right mt-4" value="Submit">
-	  	</form>
-	  		<span>Total absentee: <span class="count"></span></span>
-      		</div>
-		</div>
-  	</div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<input type="submit" class="btn submit-btn float-right mt-4" value="Submit">
+		</form>
+		<span>Total absentee: <span class="count"></span></span>
+	</div>
+</div>
+</div>
 </div>
 {% endblock %}
 {% block script %}

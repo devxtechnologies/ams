@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +28,13 @@ STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 SECRET_KEY = '!!lq!yf1iy@5@fc1-w5#&-k*&!!l!hxcfmpvgolt6h-^l1u#(='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "AMS_PRODUCTION" == 'TRUE'
+
+
+root = environ.Path(__file__)
+env = environ.Env(DEBUG=(bool, False),)
+environ.Env.read_env() 
+
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -133,8 +140,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/staticfiles/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 #Media files
 MEDIA_URL = '/media/'

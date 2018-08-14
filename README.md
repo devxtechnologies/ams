@@ -36,6 +36,10 @@ This application represents attendance management system.
 
 #### Added
 * Absentee confirm model
+* Absentee count and proper message
+
+#### Changed
+* Default colour scheme
 
 
 ### 1.1 - 07/AUG/2018

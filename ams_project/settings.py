@@ -27,10 +27,7 @@ STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 SECRET_KEY = '!!lq!yf1iy@5@fc1-w5#&-k*&!!l!hxcfmpvgolt6h-^l1u#(='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if "AMS_PRODUCTION" in os.environ:
-    DEBUG = False
-else:  
-    DEBUG = True
+DEBUG = "AMS_PRODUCTION" == 'TRUE'
 
 ALLOWED_HOSTS = ['*']
 

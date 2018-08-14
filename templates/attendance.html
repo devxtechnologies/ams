@@ -108,7 +108,6 @@
 				        		<th style="width:20%;">Sr. No.</th>
 						        <th style="width:50%;">Name</th>
 						        <th style="width:30%;">Absent <span id="hide" style="font-size:0.8em;">(mark if absent)</span>
-						        <input id="main_radio_modal" type="checkbox" onClick="toggle_modal(this)" checked>
 						        </th>
 					      	</tr>
 						</thead>
@@ -142,6 +141,7 @@ $('.submit-btn').click(function() {
 			i++;
 			if(i == 3) {
 				if($(this).children().children().prop('checked')==true){
+					$(this).children().children().removeClass('trigger');
 		  			$('.modal-table').append($(this).parent().clone());
 		  		}
 			}
@@ -206,20 +206,7 @@ $(document).ready(function() {
 </script>
 <script>
 function toggle(source) {
-	if ($('#main_radio').prop('checked')==true) {
-		$('.modal_checkbox').each(function(){
-  			$(this).prop('checked', true);
-	  	})
-	}
-	else {
-		$('.modal_checkbox').each(function(){
-  			$(this).prop('checked', false);
-	  	})
-	}
-}
-
-function toggle_modal(source) {
-	if ($('#main_radio_modal').prop('checked')==true) {
+	if ($('#main_radio').prop('checked') == true) {
 		$('.orm-check-input').each(function(){
   			$(this).prop('checked', true);
 	  	})

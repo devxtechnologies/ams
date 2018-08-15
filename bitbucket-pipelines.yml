@@ -9,4 +9,3 @@ pipelines:
           - pip install boto3==1.3.0
           - zip -r /tmp/artifact.zip ams_project/* dashboard/* main/* static/* appspec.yml templates/* code_deploy.py manage.py requirements.txt scripts/*
           - python codedeploy_deploy.py
-view raw

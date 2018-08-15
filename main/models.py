@@ -7,8 +7,8 @@ from django.db.models import signals
 
 class UserType(models.Model):
     """
-	UserType: 	
-	"""
+        UserType: Used to store the type of user Ex: Student, Principal, Professor etc.
+    """
 
     name = models.CharField("Type of User", max_length=50)
 
@@ -18,8 +18,8 @@ class UserType(models.Model):
 
 class User(AbstractUser):
     """
-	Used for storing user details
-	"""
+        User: Used for storing user details
+    """
 
     phone = models.CharField("Phone", max_length=15, null=True, blank=True)
     subjects = models.ManyToManyField("subject", blank=True)
@@ -28,8 +28,10 @@ class User(AbstractUser):
     sec = models.CharField("Section", max_length=10, null=True, blank=True)
     department = models.ForeignKey("department", null=True, blank=True)
     user_type = models.ManyToManyField("UserType")
-    father = models.CharField("Father's Name", max_length=50, null=True, blank=True)
-    mother = models.CharField("Mother's Name", max_length=50, null=True, blank=True)
+    father = models.CharField(
+        "Father's Name", max_length=50, null=True, blank=True)
+    mother = models.CharField(
+        "Mother's Name", max_length=50, null=True, blank=True)
     phone_parent = models.CharField(
         "Parent's Phone Number", max_length=50, null=True, blank=True
     )
@@ -37,8 +39,8 @@ class User(AbstractUser):
 
 class Subject(models.Model):
     """
-	Subject: Holds details about each subject
-	"""
+        Subject: Holds details about each subject
+    """
 
     name = models.CharField("Subject Name", max_length=50)
     code = models.CharField("Subject Code", max_length=50)
@@ -52,11 +54,11 @@ class Subject(models.Model):
 
 class Teaches(models.Model):
     """
-	Teaches: Holds details about the subject that the teacher teaches.
-	It links the Subject and the Teacher with the sem, sec and department that they are teaching.
-	We are storing sem, sec, deaprtment of the student to get the name of the teacher by matching the
-	details with the user table.
-	"""
+        Teaches: Holds details about the subject that the teacher teaches.
+        It links the Subject and the Teacher with the sem, sec and department that they are teaching.
+        We are storing sem, sec, deaprtment of the student to get the name of the teacher by matching the
+        details with the user table.
+    """
 
     teacher = models.ForeignKey("user")
     subject = models.ForeignKey("subject")
@@ -69,7 +71,8 @@ class Teaches(models.Model):
     # 	sub_batch = models.CharField("Student's sub batch", max_length=50, null=True, blank=True)
     # 	ug = models.BooleanField(default=False)
 
-    count = models.IntegerField("Student Count", default=0, null=True, blank=True)
+    count = models.IntegerField(
+        "Student Count", default=0, null=True, blank=True)
 
     def __str__(self):
         return (
@@ -85,8 +88,8 @@ class Teaches(models.Model):
 
 class Department(models.Model):
     """
-	Department
-	"""
+        Department
+    """
 
     name = models.CharField("Department Name", max_length=50)
 
@@ -96,8 +99,8 @@ class Department(models.Model):
 
 class Attendance(models.Model):
     """
-	Attendance: Stores the list of students for whom attendance has to be taken
-	"""
+        Attendance: Stores the list of students for whom attendance has to be taken
+    """
 
     date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
     teaches = models.ForeignKey("teaches", null=True)
@@ -108,8 +111,8 @@ class Attendance(models.Model):
 
 class Absentees(models.Model):
     """
-	Absentees: Stores the list of students who are absent
-	"""
+        Absentees: Stores the list of students who are absent
+    """
 
     user = models.ForeignKey("user")
     attendance = models.ForeignKey("attendance")
@@ -119,13 +122,14 @@ class Absentees(models.Model):
 
     def create_status(self, user, status):
         detail = f"{self.name} is marked {status}"
-        ChangeStatus.objects.create(user=user, attendance=attendance, detail=detail)
+        ChangeStatus.objects.create(
+            user=user, attendance=attendance, detail=detail)
 
 
 class ChangeStatus(models.Model):
     """
-	Stores the details of when the attendance is changed, by whom and to what
-	"""
+        Stores the details of when the attendance is changed, by whom and to what
+    """
 
     user = models.ForeignKey("user")
     datetime = models.DateTimeField(auto_now_add=True)

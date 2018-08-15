@@ -22,9 +22,14 @@ from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 
 urlpatterns = [
+    # Admin page
     url(r'^admin/', admin.site.urls),
+    # Login and logout URLs
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+    # Attendance URLs
     url(r'^attendance/', include('main.urls')),
+    # Dashboard URLs
     url(r'^dashboard/', include('dashboard.urls')),
+    # Redirecting / to /attendance/
     url(r'^$', RedirectView.as_view(url='/attendance/')),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

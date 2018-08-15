@@ -2,17 +2,17 @@ version: 0.0
 os: linux
 files:
   - source: manage.py
-    destination: /home/ubuntu/
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
-      timeout: 300
-      runas: ubuntu
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: ubuntu
-  ApplicationStart:
-    - location: scripts/start_server
-      timeout: 300
-      runas: ubuntu
+    destination: /home/ubuntu/ams/
+# hooks:
+#   BeforeInstall:
+#     - location: scripts/install_dependencies
+#       timeout: 300
+#       runas: ubuntu
+#   ApplicationStop:
+#     - location: scripts/stop_server
+#       timeout: 300
+#       runas: ubuntu
+#   ApplicationStart:
+#     - location: scripts/start_server
+#       timeout: 300
+#       runas: ubuntu

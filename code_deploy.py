@@ -20,6 +20,8 @@ from time import strftime, sleep
 import boto3
 from botocore.exceptions import ClientError
 
+print("Started")
+
 VERSION_LABEL = strftime("%Y%m%d%H%M%S")
 BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + VERSION_LABEL + \
     '-bitbucket_builds.zip'
@@ -30,6 +32,7 @@ def upload_to_s3(artifact):
     """
     try:
         client = boto3.client('s3')
+        print("1st try worked")
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False

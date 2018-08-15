@@ -8,6 +8,7 @@ class SubjectSelectForm(forms.ModelForm):
     """
         SubjectSelectForm: 
     """
+
     class Meta:
         model = Attendance
         exclude = ("date_time",)
@@ -15,5 +16,4 @@ class SubjectSelectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")
         super(SubjectSelectForm, self).__init__(*args, **kwargs)
-        self.fields["teaches"].queryset = Teaches.objects.filter(
-            teacher=self.user)
+        self.fields["teaches"].queryset = Teaches.objects.filter(teacher=self.user)

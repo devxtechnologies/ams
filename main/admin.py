@@ -12,10 +12,12 @@ class UserResource(resources.ModelResource):
     class Meta:
         model = User
 
+
 # Used for import_export
 class SubjectResource(resources.ModelResource):
     class Meta:
         model = Subject
+
 
 # Used for import_export
 class TeachesResource(resources.ModelResource):
@@ -45,13 +47,11 @@ class UserAdmin(DjangoUserAdmin, ImportExportModelAdmin):
             },
         ),
         (("Student Information"), {"fields": ("sem", "sec", "department")}),
-        (("Parent Information"), {
-         "fields": ("father", "mother", "phone_parent")}),
+        (("Parent Information"), {"fields": ("father", "mother", "phone_parent")}),
         (("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
-        (None, {"classes": ("wide",), "fields": (
-            "email", "password1", "password2")}),
+        (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),
     )
 
     list_display = ("username", "first_name", "last_name", "phone", "email")
@@ -63,8 +63,13 @@ class UserAdmin(DjangoUserAdmin, ImportExportModelAdmin):
 
 @admin.register(Teaches)
 class TeachesAdmin(ImportExportModelAdmin):
-    list_display = ("teachers_first_name", "subject_name",
-                    "sem", "sec", "department_name")
+    list_display = (
+        "teachers_first_name",
+        "subject_name",
+        "sem",
+        "sec",
+        "department_name",
+    )
     search_fields = ("teacher__first_name", "subject__name", "subject__code")
     ordering = ("id",)
 

@@ -28,10 +28,8 @@ class User(AbstractUser):
     sec = models.CharField("Section", max_length=10, null=True, blank=True)
     department = models.ForeignKey("department", null=True, blank=True)
     user_type = models.ManyToManyField("UserType")
-    father = models.CharField(
-        "Father's Name", max_length=50, null=True, blank=True)
-    mother = models.CharField(
-        "Mother's Name", max_length=50, null=True, blank=True)
+    father = models.CharField("Father's Name", max_length=50, null=True, blank=True)
+    mother = models.CharField("Mother's Name", max_length=50, null=True, blank=True)
     phone_parent = models.CharField(
         "Parent's Phone Number", max_length=50, null=True, blank=True
     )
@@ -71,8 +69,7 @@ class Teaches(models.Model):
     # 	sub_batch = models.CharField("Student's sub batch", max_length=50, null=True, blank=True)
     # 	ug = models.BooleanField(default=False)
 
-    count = models.IntegerField(
-        "Student Count", default=0, null=True, blank=True)
+    count = models.IntegerField("Student Count", default=0, null=True, blank=True)
 
     def __str__(self):
         return (
@@ -99,7 +96,8 @@ class Department(models.Model):
 
 class Attendance(models.Model):
     """
-        Attendance: Stores the list of students for whom attendance has to be taken
+        Attendance: It stores class details even if no one is absent. 
+        It acts as a proof that, that particular class was there.
     """
 
     date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -111,7 +109,7 @@ class Attendance(models.Model):
 
 class Absentees(models.Model):
     """
-        Absentees: Stores the list of students who are absent
+        Absentees: Stores the absentees
     """
 
     user = models.ForeignKey("user")
@@ -122,8 +120,7 @@ class Absentees(models.Model):
 
     def create_status(self, user, status):
         detail = f"{self.name} is marked {status}"
-        ChangeStatus.objects.create(
-            user=user, attendance=attendance, detail=detail)
+        ChangeStatus.objects.create(user=user, attendance=attendance, detail=detail)
 
 
 class ChangeStatus(models.Model):

@@ -63,8 +63,7 @@ class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
         return msg
 
     def post(self, request, *args, **kwargs):
-        teaches = Teaches.objects.get(
-            pk=self.request.session.get("teaches_pk"))
+        teaches = Teaches.objects.get(pk=self.request.session.get("teaches_pk"))
         attendance = Attendance.objects.create(teaches=teaches)
         student = request.POST.getlist("student")
         for i in student:

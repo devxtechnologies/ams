@@ -18,12 +18,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         2. /attendance/report/ (Access: Professors, Principal, Admin)
 
     """
+
     template_name = "dashboard/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        attendance = Attendance.objects.filter(
-            teaches__teacher=self.request.user)
+        attendance = Attendance.objects.filter(teaches__teacher=self.request.user)
         context["attendance_list"] = attendance
 
         return context

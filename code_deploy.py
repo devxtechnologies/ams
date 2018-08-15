@@ -95,7 +95,7 @@ def deploy_new_revision():
             deploymentStatus=deploymentResponse['deploymentInfo']['status']
             print(deploymentResponse['deploymentInfo'])
             print('------------')
-            print(eploymentResponse)
+            print(deploymentResponse)
             if deploymentStatus == 'Succeeded':
                 print ("Deployment Succeeded")
                 return True

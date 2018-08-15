@@ -38,7 +38,7 @@ def upload_to_s3(artifact):
         return False
     try:
         client.put_object(
-            Body=open(artifact, 'py'),
+            Body=open(artifact, 'rb'),
             Bucket=os.getenv('S3_BUCKET'),
             Key=BUCKET_KEY
         )

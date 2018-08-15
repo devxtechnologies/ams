@@ -7,6 +7,5 @@ pipelines:
           - apt-get update
           - apt-get install -y zip
           - pip install boto3==1.3.0
-          - zip -r /home/ubuntu/temp/artifact.zip ams/ams_project/* ams/dashboard/* ams/main/* ams/static/* ams/appspec.yml ams/templates/* ams/code_deploy.py ams/manage.py ams/requirements.txt ams/scripts/*
-          - zip -r /tmp/artifact.zip ams/ams_project/* ams/dashboard/* ams/main/* ams/static/* ams/appspec.yml ams/templates/* ams/code_deploy.py ams/manage.py ams/requirements.txt ams/scripts/*
+          - zip -r /tmp/artifact.zip ams_project/* dashboard/* main/* static/* appspec.yml templates/* code_deploy.py manage.py requirements.txt scripts/*
           - python code_deploy.py

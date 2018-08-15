@@ -1,81 +1,128 @@
 # Attendance Management System
 
-
 This application represents attendance management system.
 
 ## Setup
 
+1.  [Local Environment Setup](#local-environment-setup)
+2.  [Runnig The Application](#running-the-application)
+3.  [Apps](#apps)
+4.  [Changelog](#change-log)
 
-1. [Local Environment Setup](#local-environment-setup)
-2. [Runnig The Application](#running-the-application)
-3. [Changelog](#changelog)
+### Local environment setup
 
-## Local environment setup
+#### Create a virtual environment
 
-### Create a virtual environment
+1.  `virtualenv <env_name>`
+2.  `source <env_name>/bin/activate`
+3.  `deactivate` to deactivate.
 
+#### Install requirements
 
-1. `virtualenv <env_name>`
-2. `source <env_name>/bin/activate`
-3. `deactivate` to deactivate.
+1.  `pip install -r requirements.txt`
 
-### Install requirements
+### Running the application
 
+1.  Activate the environment `source <env_name>/bin/activate`
+2.  Start the application `python manage.py runserver`
+3.  Go to [localhost:8000/](localhost:8000)
 
-1. `pip install -r requirements.txt`
+### Apps
 
-## Running the application
+1.  [Main](#main)
+2.  [Dashboard](#dashboard)
 
+#### Main
 
-1. Activate the environment `source <env_name>/bin/activate`
-2. Start the application `python manage.py runserver`
+1.  [InitialView](initialview)
+2.  [AttendanceView](attendanceview)
 
-## CHANGELOG
+##### InitialView (/attendance)
 
-### 1.2 - (pending)
+This view initialises the list of subjects available for the user and accepts the name of the subject that the attendance is being given for.
 
-#### Added
-* Absentee confirm model
-* Absentee count and proper message
+URL: [localhost:8000/attendance/](localhost:8000/attendance/)
 
-#### Changed
-* Default colour scheme
+##### AttendanceView (/attendance/entry)
 
+This view lists the students for the selected subject and accepts the absentee list for that particular subject fot that particular hour.
 
-### 1.1 - 07/AUG/2018
+URL: [localhost:8000/attendance/entry/](localhost:8000/attendance/entry/)
 
-#### Added
-* Favicon added
-* Bug Fixes
-* Login page errors
-* Login/Logout URLs
+#### Dashboard
 
+1.  [DashboardView](dashboardview)
+2.  [LogView](logview)
+3.  [ReportView](reportview)
 
-### 1.0 - 07/AUG/2018
+##### DashboardView (/dashboard)
 
-#### Added
-* Color inversion toggle switch
-* LocalStorage
-* Moved to BitBucket
-* Select all button in attendance main
+This view is the initial landing page of the dashboard. Some attendance statistics are displayed in this page along with some quick links.
 
+URL: [localhost:8000/dashboard/](localhost:8000/dashboard/)
 
-### 1.1 (Beta) - 07/AUG/2018
+##### LogView (/dashboard/log)
 
-#### Added
-* Department model
-* Main JS file
+This view initializes the list of subjects available for the user and accepts the name of the subject that the attendance is being given for.
 
-#### Changed
-* User Model
-* Teaches Model
-* Minor UI
+URL: [localhost:8000/dashboard/log/](localhost:8000/dashboard/log/)
 
-### 1.0 (Beta) - 26/JULY/2018
+##### ReportView (/dashboard/report)
 
-#### Added
-* Account Registration
-* Attendance Entry (Subject selection)
-* Attendance Main
-* SMS mixin
-* Dashboard UI
+This view is to show all the changes that have been made to the existing attendance.
+
+URL: [localhost:8000/dashboard/report/](localhost:8000/dashboard/report/)
+
+### CHANGE LOG
+
+#### 1.2 - (pending)
+
+##### Added
+
+-   Absentee confirm model
+-   Absentee count and proper message
+
+##### Changed
+
+-   Default colour scheme
+
+#### 1.1 - 07/AUG/2018
+
+##### Added
+
+-   Favicon added
+-   Bug Fixes
+-   Login page errors
+-   Login/Logout URLs
+
+#### 1.0 - 07/AUG/2018
+
+##### Added
+
+-   Color inversion toggle switch
+-   LocalStorage
+-   Moved to BitBucket
+-   Select all button in attendance main
+
+#### 1.1 (Beta) - 07/AUG/2018
+
+##### Added
+
+-   Department model
+-   Main JS file
+
+##### Changed
+
+-   User Model
+-   Teaches Model
+-   Minor UI
+
+#### 1.0 (Beta) - 26/JULY/2018
+
+##### Added
+
+-   Account Registration
+-   Attendance Entry (Subject selection)
+-   Attendance Main
+-   SMS mixin
+-   Dashboard UI

@@ -38,10 +38,11 @@ def upload_to_s3(artifact):
         return False
     try:
         client.put_object(
-            Body=open(artifact, 'rb'),
+            Body=open(artifact, 'py'),
             Bucket=os.getenv('S3_BUCKET'),
             Key=BUCKET_KEY
         )
+        print("Put object into s3 worked")
     except ClientError as err:
         print("Failed to upload artifact to S3.\n" + str(err))
         return False
@@ -56,11 +57,13 @@ def deploy_new_revision():
     """
     try:
         client = boto3.client('codedeploy')
+        print("boto3 client created")
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False
 
     try:
+        print(os.getenv('APPLICATION_NAME'))
         response = client.create_deployment(
             applicationName=str(os.getenv('APPLICATION_NAME')),
             deploymentGroupName=str(os.getenv('DEPLOYMENT_GROUP_NAME')),
@@ -76,6 +79,7 @@ def deploy_new_revision():
             description='New deployment from BitBucket',
             ignoreApplicationStopFailures=True
         )
+        print("Deployment created")
     except ClientError as err:
         print("Failed to deploy application revision.\n" + str(err))
         return False     
@@ -89,6 +93,9 @@ def deploy_new_revision():
                 deploymentId=str(response['deploymentId'])
             )
             deploymentStatus=deploymentResponse['deploymentInfo']['status']
+            print(deploymentResponse['deploymentInfo'])
+            print('------------')
+            print(eploymentResponse)
             if deploymentStatus == 'Succeeded':
                 print ("Deployment Succeeded")
                 return True

@@ -7,17 +7,23 @@ from .models import *
 
 # Register your models here.
 
+# Used for import_export
 class UserResource(resources.ModelResource):
     class Meta:
         model = User
 
+
+# Used for import_export
 class SubjectResource(resources.ModelResource):
     class Meta:
         model = Subject
 
+
+# Used for import_export
 class TeachesResource(resources.ModelResource):
     class Meta:
         model = Teaches
+
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin, ImportExportModelAdmin):
@@ -57,7 +63,13 @@ class UserAdmin(DjangoUserAdmin, ImportExportModelAdmin):
 
 @admin.register(Teaches)
 class TeachesAdmin(ImportExportModelAdmin):
-    list_display = ("teachers_first_name", "subject_name", "sem", "sec", "department_name")
+    list_display = (
+        "teachers_first_name",
+        "subject_name",
+        "sem",
+        "sec",
+        "department_name",
+    )
     search_fields = ("teacher__first_name", "subject__name", "subject__code")
     ordering = ("id",)
 

@@ -5,6 +5,10 @@ from django.forms import modelformset_factory
 
 
 class SubjectSelectForm(forms.ModelForm):
+    """
+        SubjectSelectForm: 
+    """
+
     class Meta:
         model = Attendance
         exclude = ("date_time",)

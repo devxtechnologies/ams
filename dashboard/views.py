@@ -11,7 +11,7 @@ from main.models import *
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
         DashboardView: This is the initial landing page of the dashboard.
-        Some attendance statics are displayed in this page along with links to
+        Some attendance statistics are displayed in this page along with links to
         the following pages:
 
         1. /attendance/log/ (Access: Principal, Admin)

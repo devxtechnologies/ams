@@ -26,6 +26,7 @@ class InitialView(LoginRequiredMixin, FormView):
     def get_form_kwargs(self):
         kwargs = super(InitialView, self).get_form_kwargs()
         kwargs.update({"user": self.request.user})
+        print(scheduler.get_jobs())
         return kwargs
 
     def post(self, request, *args, **kwargs):
@@ -69,6 +70,6 @@ class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
         for i in student:
             user = User.objects.get(username=i)
             Absentees.objects.create(user=user, attendance=attendance)
-            msg = self.get_msg(user.first_name, teaches.subject)
-            self.send_msg(user.phone, msg)
+            # msg = self.get_msg(user.first_name, teaches.subject)
+            # self.send_msg(user.phone, msg)
         return redirect(reverse_lazy("initial"))

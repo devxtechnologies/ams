@@ -73,6 +73,21 @@ This view is to show all the changes that have been made to the existing attenda
 
 URL: [localhost:8000/dashboard/report/](localhost:8000/dashboard/report/)
 
+
+### Management Commands
+
+#### How to Use:
+
+`python manage.py <command_name>`
+
+#### Commands
+
+`send_message_to_absentee` - Runs through all the absentee of that day and sends a message to their parents. 
+
+(This is to be run as cron job in the production, every day at 4pm. For more information <a href="https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/">Go here</a> or <a href="https://medium.com/@bencleary/django-scheduled-tasks-queues-part-1-62d6b6dc24f8">here</a>)
+
+
+
 ### CHANGE LOG
 
 #### 1.2 - (pending)

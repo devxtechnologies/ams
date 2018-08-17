@@ -84,7 +84,7 @@ URL: [localhost:8000/dashboard/report/](localhost:8000/dashboard/report/)
 
 `send_message_to_absentee` - Runs through all the absentee of that day and sends a message to their parents. 
 
-(This is to be run as cron job in the production, every day at 4pm. For more information <a href="https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/">Go here</a> or <a href="https://medium.com/@bencleary/django-scheduled-tasks-queues-part-1-62d6b6dc24f8">here</a>)
+(This is to be run as cron job in the production, every day at 4pm. For more information go <https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/> or <https://medium.com/@bencleary/django-scheduled-tasks-queues-part-1-62d6b6dc24f8>)
 
 
 

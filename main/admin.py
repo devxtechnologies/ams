@@ -115,7 +115,7 @@ class AbsenteeAdmin(admin.ModelAdmin):
     )
     search_fields = ("user__first_name",)
     list_filter = (
-        ('attendance__date_time', DateRangeFilter), ('attendance__date_time', DateTimeRangeFilter),
+        ('attendance__date_time', DateRangeFilter),
         "attendance__teaches__subject__name",
         "attendance__teaches__sem",
         "attendance__teaches__sec",

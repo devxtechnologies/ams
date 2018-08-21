@@ -29,7 +29,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles"),)
 SECRET_KEY = "!!lq!yf1iy@5@fc1-w5#&-k*&!!l!hxcfmpvgolt6h-^l1u#(="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+#testing hook
 
 root = environ.Path(__file__)
 env = environ.Env(DEBUG=(bool, False))

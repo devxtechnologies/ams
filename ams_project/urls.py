@@ -22,8 +22,10 @@ from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    # Admin page
-    url(r"^admin/", admin.site.urls),
+    # JET page
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    # Admin Page
+    url(r'^admin/', include(admin.site.urls)),
     # Login and logout URLs
     url(r"^accounts/", include("registration.backends.hmac.urls")),
     # Attendance URLs

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import signals
 from django.db.models.signals import post_save, pre_delete
 from .middleware import RequestMiddleware
+
 # Create your models here.
 
 
@@ -133,16 +134,21 @@ class ChangeStatus(models.Model):
     def __str__(self):
         return self.detail
 
+    class Meta:
+        verbose_name_plural = "Logs"
+
 
 def create_status(sender, instance, created=None, **kwargs):
-        request = RequestMiddleware(get_response=None)
-        request = request.thread_local.current_request
-        if request.user.is_superuser:
-            if created:
-                detail = f"Admin marked {instance.user.first_name} absente for class {instance.attendance.teaches.subject}"
-            else:
-                detail = f"Admin marked {instance.user.first_name} present for class {instance.attendance.teaches.subject}"
-            ChangeStatus.objects.create(user=request.user, attendance=instance.attendance, detail=detail)
+    request = RequestMiddleware(get_response=None)
+    request = request.thread_local.current_request
+    if request.user.is_superuser:
+        if created:
+            detail = f"Admin marked {instance.user.first_name} absentee for class {instance.attendance.teaches.subject}"
+        else:
+            detail = f"Admin marked {instance.user.first_name} present for class {instance.attendance.teaches.subject}"
+        ChangeStatus.objects.create(
+            user=request.user, attendance=instance.attendance, detail=detail
+        )
 
 
 post_save.connect(create_status, sender=Absentees)

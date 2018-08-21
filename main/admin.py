@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 from .models import *
 
@@ -114,7 +115,7 @@ class AbsenteeAdmin(admin.ModelAdmin):
     )
     search_fields = ("user__first_name",)
     list_filter = (
-        "attendance__date_time",
+        ("attendance__date_time", DateRangeFilter),
         "attendance__teaches__subject__name",
         "attendance__teaches__sem",
         "attendance__teaches__sec",
@@ -157,10 +158,21 @@ class AbsenteeAdmin(admin.ModelAdmin):
     def sec_(self, instance):
         return instance.attendance.teaches.sec
 
+
+@admin.register(ChangeStatus)
+class ChangeStatusAdmin(admin.ModelAdmin):
+
+    list_display = ("detail", "teacher_", "datetime")
+
+    def teacher_(self, instance):
+        return instance.attendance.teaches.teacher
+
     def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
         return False
 
 
 admin.site.register(Department)
 admin.site.register(Attendance)
-admin.site.register(ChangeStatus)

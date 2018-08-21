@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "import_export",
     'jet',
     'django.contrib.admin',
+    'rangefilter',
 ]
 
 MIDDLEWARE = [

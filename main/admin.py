@@ -161,3 +161,4 @@ class AbsenteeAdmin(admin.ModelAdmin):
 
 admin.site.register(Department)
 admin.site.register(Attendance)
+admin.site.register(ChangeStatus)

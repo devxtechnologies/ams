@@ -137,7 +137,6 @@ class ChangeStatus(models.Model):
 def create_status(sender, instance, created=None, **kwargs):
         request = RequestMiddleware(get_response=None)
         request = request.thread_local.current_request
-        print(created)
         if request.user.is_superuser:
             if created:
                 detail = f"Admin marked {instance.user.first_name} absente for class {instance.attendance.teaches.subject}"

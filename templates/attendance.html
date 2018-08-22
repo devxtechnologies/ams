@@ -169,10 +169,26 @@ $(document).on('show.bs.modal', '#myModal', function (e) {
     		if($(this).prop('checked') == false) {
     			$('.count').html(count - 1);
     			count = parseInt($('.count').html())
+    			if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().removeClass('selected')
+					$(this).parent().parent().siblings().removeClass('selected')
+	  			}
+	  			else {
+	  				$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	  			}
     		}
     		else {
     			$('.count').html(count + 1);
-    			count = parseInt($('.count').html())	
+    			count = parseInt($('.count').html())
+    			if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+  				}
+  				else {
+	  				$(this).parent().parent().addClass('selected_dark')
+					$(this).parent().parent().siblings().addClass('selected_dark')
+	  			}
     		}
     	})
     })
@@ -183,6 +199,34 @@ if($('#oops').length > 0) {
 	$('#submit').attr('disabled', 'true');
 	$('#submit').css('cursor', 'not-allowed');
 }
+</script>
+<script>
+$(function() {
+	$('.orm-check-input').each(function() {
+		$(this).change(function() {
+			if($(this).prop('checked') == true){
+				if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+  				}
+  				else {
+	  				$(this).parent().parent().addClass('selected_dark')
+					$(this).parent().parent().siblings().addClass('selected_dark')
+	  			}
+			}
+			else {
+				if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().removeClass('selected')
+					$(this).parent().parent().siblings().removeClass('selected')
+	  			}
+	  			else {
+	  				$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	  			}
+			}
+		})
+	})
+})
 </script>
 <script>
 $(function() {
@@ -238,11 +282,27 @@ function toggle(source) {
 	if ($('#main_radio').prop('checked') == true) {
 		$('.orm-check-input').each(function(){
   			$(this).prop('checked', true);
+  			if($('#cmn-toggle-4').prop('checked') == true) {
+  				$(this).parent().parent().addClass('selected')
+				$(this).parent().parent().siblings().addClass('selected')
+  			}
+  			else {
+  				$(this).parent().parent().addClass('selected_dark')
+				$(this).parent().parent().siblings().addClass('selected_dark')
+  			}
 	  	})
 	}
 	else {
 		$('.orm-check-input').each(function(){
   			$(this).prop('checked', false);
+  			if($('#cmn-toggle-4').prop('checked') == true) {
+  				$(this).parent().parent().removeClass('selected')
+				$(this).parent().parent().siblings().removeClass('selected')
+  			}
+  			else {
+  				$(this).parent().parent().removeClass('selected_dark')
+				$(this).parent().parent().siblings().removeClass('selected_dark')
+  			}
 	  	})
 	}
 }
@@ -282,6 +342,14 @@ function toggle(source) {
 	    		$(this).css('background-color', 'white')
 	    		$(this).css('color', 'black');
 	    	})
+	    	$('.orm-check-input').each(function() {
+	    		if($(this).prop('checked') == true) {
+	    			$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+					$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	    		}
+	    	})
 	    }
 	    else {
 	    	localStorage.setItem("checked", 'false');
@@ -292,6 +360,12 @@ function toggle(source) {
 	    		$(this).css('background-color', '#2c3338')
 	    		$(this).css('color', 'white');
 	    	})
+	    	if($('.orm-check-input').prop('checked') == true) {
+	    		$(this).parent().parent().removeClass('selected')
+				$(this).parent().parent().siblings().removeClass('selected')
+    			$(this).parent().parent().addClass('selected_dark')
+				$(this).parent().parent().siblings().addClass('selected_dark')
+    		}
 	    }
 	});
 </script>

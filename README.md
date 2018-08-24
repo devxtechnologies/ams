@@ -91,16 +91,20 @@ URL: [localhost:8000/dashboard/report/](localhost:8000/dashboard/report/)
 
 ### CHANGE LOG
 
-#### 1.2 - (pending)
+#### 1.2 - 24/AUG/2018
 
 ##### Added
 
--   Absentee confirm model
--   Absentee count and proper message
+-   Absentee confirm modal
+-   Dynamic Absentee count and proper message
+-   Row highlight on click, in attendance table
+-   New dashboard interface
+-   Admin actions get logged
 
 ##### Changed
 
 -   Default colour scheme
+-   Message sent at 4pm everyday, cron jobs used
 
 #### 1.1 - 07/AUG/2018
 

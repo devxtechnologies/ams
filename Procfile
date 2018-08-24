@@ -1,0 +1,1 @@
+web: gunicorn ams_project.wsgi:application 

@@ -9,6 +9,16 @@ from main.models import *
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
+    """
+        DashboardView: This is the initial landing page of the dashboard.
+        Some attendance statistics are displayed in this page along with links to
+        the following pages:
+
+        1. /attendance/log/ (Access: Principal, Admin)
+        2. /attendance/report/ (Access: Professors, Principal, Admin)
+
+    """
+
     template_name = "dashboard/index.html"
 
     def get_context_data(self, **kwargs):
@@ -21,9 +31,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 class LogView(LoginRequiredMixin, TemplateView):
     """
-	This is to show all the changes that have been made to the existing
-	attendance.
-	"""
+        LogView: This is to show all the changes that have been made to the existing
+        attendance.
+    """
 
     template_name = "dashboard/log.html"
 
@@ -35,9 +45,9 @@ class LogView(LoginRequiredMixin, TemplateView):
 
 class ReportView(LoginRequiredMixin, TemplateView):
     """
-	This is to show all the changes that have been made to the existing
-	attendance.
-	"""
+        ReportView: This is to show all the changes that have been made to the existing
+        attendance.
+    """
 
     template_name = "dashboard/report.html"
 

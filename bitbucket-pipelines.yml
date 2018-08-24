@@ -1,0 +1,11 @@
+pipelines:
+  default:
+    - step:
+        name: Deploy
+        image: python:3.6.5
+        script:
+          - apt-get update
+          - apt-get install -y zip
+          - pip install boto3==1.3.0
+          - zip -r /tmp/artifact.zip ams_project/* dashboard/* main/* static/* appspec.yml templates/* code_deploy.py manage.py requirements.txt scripts/*
+          - python code_deploy.py

@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models import signals
+from django.db.models.signals import post_save, pre_delete
+from .middleware import RequestMiddleware
 
 # Create your models here.
 
 
 class UserType(models.Model):
     """
-	UserType: 	
-	"""
+        UserType: Used to store the type of user Ex: Student, Principal, Professor etc.
+    """
 
     name = models.CharField("Type of User", max_length=50)
 
@@ -18,8 +20,8 @@ class UserType(models.Model):
 
 class User(AbstractUser):
     """
-	Used for storing user details
-	"""
+        User: Used for storing user details
+    """
 
     phone = models.CharField("Phone", max_length=15, null=True, blank=True)
     subjects = models.ManyToManyField("subject", blank=True)
@@ -37,8 +39,8 @@ class User(AbstractUser):
 
 class Subject(models.Model):
     """
-	Subject: Holds details about each subject
-	"""
+        Subject: Holds details about each subject
+    """
 
     name = models.CharField("Subject Name", max_length=50)
     code = models.CharField("Subject Code", max_length=50)
@@ -52,11 +54,11 @@ class Subject(models.Model):
 
 class Teaches(models.Model):
     """
-	Teaches: Holds details about the subject that the teacher teaches.
-	It links the Subject and the Teacher with the sem, sec and department that they are teaching.
-	We are storing sem, sec, deaprtment of the student to get the name of the teacher by matching the
-	details with the user table.
-	"""
+        Teaches: Holds details about the subject that the teacher teaches.
+        It links the Subject and the Teacher with the sem, sec and department that they are teaching.
+        We are storing sem, sec, deaprtment of the student to get the name of the teacher by matching the
+        details with the user table.
+    """
 
     teacher = models.ForeignKey("user")
     subject = models.ForeignKey("subject")
@@ -85,8 +87,8 @@ class Teaches(models.Model):
 
 class Department(models.Model):
     """
-	Department
-	"""
+        Department
+    """
 
     name = models.CharField("Department Name", max_length=50)
 
@@ -96,8 +98,9 @@ class Department(models.Model):
 
 class Attendance(models.Model):
     """
-	Attendance: Stores the list of students for whom attendance has to be taken
-	"""
+        Attendance: It stores class details even if no one is absent. 
+        It acts as a proof that, that particular class was there.
+    """
 
     date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
     teaches = models.ForeignKey("teaches", null=True)
@@ -108,8 +111,8 @@ class Attendance(models.Model):
 
 class Absentees(models.Model):
     """
-	Absentees: Stores the list of students who are absent
-	"""
+        Absentees: Stores the absentees
+    """
 
     user = models.ForeignKey("user")
     attendance = models.ForeignKey("attendance")
@@ -117,15 +120,11 @@ class Absentees(models.Model):
     def __str__(self):
         return self.user.first_name
 
-    def create_status(self, user, status):
-        detail = f"{self.name} is marked {status}"
-        ChangeStatus.objects.create(user=user, attendance=attendance, detail=detail)
-
 
 class ChangeStatus(models.Model):
     """
-	Stores the details of when the attendance is changed, by whom and to what
-	"""
+        Stores the details of when the attendance is changed, by whom and to what
+    """
 
     user = models.ForeignKey("user")
     datetime = models.DateTimeField(auto_now_add=True)
@@ -133,4 +132,24 @@ class ChangeStatus(models.Model):
     detail = models.TextField()
 
     def __str__(self):
-        return f"{self.user} changed {self.detail} at {self.datetime}"
+        return self.detail
+
+    class Meta:
+        verbose_name_plural = "Logs"
+
+
+def create_status(sender, instance, created=None, **kwargs):
+    request = RequestMiddleware(get_response=None)
+    request = request.thread_local.current_request
+    if request.user.is_superuser:
+        if created:
+            detail = f"Admin marked {instance.user.first_name} absentee for class {instance.attendance.teaches.subject}"
+        else:
+            detail = f"Admin marked {instance.user.first_name} present for class {instance.attendance.teaches.subject}"
+        ChangeStatus.objects.create(
+            user=request.user, attendance=instance.attendance, detail=detail
+        )
+
+
+post_save.connect(create_status, sender=Absentees)
+pre_delete.connect(create_status, sender=Absentees)

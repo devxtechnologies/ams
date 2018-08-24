@@ -157,12 +157,76 @@ $('.submit-btn').click(function() {
     }
     $('.count').html(count);
 })
+$(document).on('show.bs.modal', '#myModal', function (e) {
+    $('.modal-body').each(function() {
+    	$(this).find('tr').each(function() {
+    		$(this).children().children().children().addClass('modal-checkbox')
+    	})
+    })
+    $('.modal-checkbox').each(function() {
+    	count = parseInt($('.count').html());
+    	$(this).change(function() {
+    		if($(this).prop('checked') == false) {
+    			$('.count').html(count - 1);
+    			count = parseInt($('.count').html())
+    			if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().removeClass('selected')
+					$(this).parent().parent().siblings().removeClass('selected')
+	  			}
+	  			else {
+	  				$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	  			}
+    		}
+    		else {
+    			$('.count').html(count + 1);
+    			count = parseInt($('.count').html())
+    			if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+  				}
+  				else {
+	  				$(this).parent().parent().addClass('selected_dark')
+					$(this).parent().parent().siblings().addClass('selected_dark')
+	  			}
+    		}
+    	})
+    })
+});
 </script>
 <script>
 if($('#oops').length > 0) {
 	$('#submit').attr('disabled', 'true');
 	$('#submit').css('cursor', 'not-allowed');
 }
+</script>
+<script>
+$(function() {
+	$('.orm-check-input').each(function() {
+		$(this).change(function() {
+			if($(this).prop('checked') == true){
+				if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+  				}
+  				else {
+	  				$(this).parent().parent().addClass('selected_dark')
+					$(this).parent().parent().siblings().addClass('selected_dark')
+	  			}
+			}
+			else {
+				if($('#cmn-toggle-4').prop('checked') == true) {
+	  				$(this).parent().parent().removeClass('selected')
+					$(this).parent().parent().siblings().removeClass('selected')
+	  			}
+	  			else {
+	  				$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	  			}
+			}
+		})
+	})
+})
 </script>
 <script>
 $(function() {
@@ -218,18 +282,34 @@ function toggle(source) {
 	if ($('#main_radio').prop('checked') == true) {
 		$('.orm-check-input').each(function(){
   			$(this).prop('checked', true);
+  			if($('#cmn-toggle-4').prop('checked') == true) {
+  				$(this).parent().parent().addClass('selected')
+				$(this).parent().parent().siblings().addClass('selected')
+  			}
+  			else {
+  				$(this).parent().parent().addClass('selected_dark')
+				$(this).parent().parent().siblings().addClass('selected_dark')
+  			}
 	  	})
 	}
 	else {
 		$('.orm-check-input').each(function(){
   			$(this).prop('checked', false);
+  			if($('#cmn-toggle-4').prop('checked') == true) {
+  				$(this).parent().parent().removeClass('selected')
+				$(this).parent().parent().siblings().removeClass('selected')
+  			}
+  			else {
+  				$(this).parent().parent().removeClass('selected_dark')
+				$(this).parent().parent().siblings().removeClass('selected_dark')
+  			}
 	  	})
 	}
 }
 </script>
 <script type="text/javascript">
 	if(window.localStorage.length == 0) {
-        localStorage.setItem("checked", 'false');
+        localStorage.setItem("checked", 'true');
     }
 	var checked = localStorage.getItem('checked');
 	if(checked == 'true') {
@@ -262,6 +342,14 @@ function toggle(source) {
 	    		$(this).css('background-color', 'white')
 	    		$(this).css('color', 'black');
 	    	})
+	    	$('.orm-check-input').each(function() {
+	    		if($(this).prop('checked') == true) {
+	    			$(this).parent().parent().addClass('selected')
+					$(this).parent().parent().siblings().addClass('selected')
+					$(this).parent().parent().removeClass('selected_dark')
+					$(this).parent().parent().siblings().removeClass('selected_dark')
+	    		}
+	    	})
 	    }
 	    else {
 	    	localStorage.setItem("checked", 'false');
@@ -272,6 +360,12 @@ function toggle(source) {
 	    		$(this).css('background-color', '#2c3338')
 	    		$(this).css('color', 'white');
 	    	})
+	    	if($('.orm-check-input').prop('checked') == true) {
+	    		$(this).parent().parent().removeClass('selected')
+				$(this).parent().parent().siblings().removeClass('selected')
+    			$(this).parent().parent().addClass('selected_dark')
+				$(this).parent().parent().siblings().addClass('selected_dark')
+    		}
 	    }
 	});
 </script>

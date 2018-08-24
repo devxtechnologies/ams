@@ -13,10 +13,11 @@ import datetime
 
 
 class InitialView(LoginRequiredMixin, FormView):
+
     """
-	InitialView: This view initialises the list of subjects available for the user and accepts 
-	the name of the subject that the attendance is being given for.
-	"""
+        InitialView: This view initialises the list of subjects available for the user and accepts
+        the name of the subject that the attendance is being given for.
+    """
 
     template_name = "initial.html"
     form_class = SubjectSelectForm
@@ -33,6 +34,12 @@ class InitialView(LoginRequiredMixin, FormView):
 
 
 class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
+
+    """
+        AttendanceView: This view lists the students for the selected subject and accepts the
+        absentee list for that particular subject fot that particular hour.
+    """
+
     template_name = "attendance.html"
     url = "https://api.textlocal.in/send/?username=nandkeolyar.aayush@gmail.com&hash=19dd5bfe0649f20c9fa6e742b873a77c9bd18ea14368fc4e52914b4e8add2ab6&sender=TBMSCL&"
 
@@ -62,6 +69,4 @@ class AttendanceView(SendSMSMixin, LoginRequiredMixin, View):
         for i in student:
             user = User.objects.get(username=i)
             Absentees.objects.create(user=user, attendance=attendance)
-            msg = self.get_msg(user.first_name, teaches.subject)
-            self.send_msg(user.phone, msg)
         return redirect(reverse_lazy("initial"))

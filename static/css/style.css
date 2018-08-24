@@ -304,3 +304,7 @@ input:checked + .slider:before {
     margin-bottom:35% !important;
   }
 }
+
+.selected {
+  background-color: black;
+}

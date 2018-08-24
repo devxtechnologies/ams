@@ -35,7 +35,8 @@ root = environ.Path(__file__)
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
-DEBUG = env("DEBUG")
+if env("DEBUG"):
+    DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 

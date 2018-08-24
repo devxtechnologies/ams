@@ -20,6 +20,7 @@ django-jet==1.0.7
 django-widget-tweaks==1.4.2
 et-xmlfile==1.0.1
 google-api-python-client==1.4.1
+gunicorn
 httplib2==0.11.3
 identify==1.1.4
 idna==2.7

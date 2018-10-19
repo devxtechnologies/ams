@@ -1,4 +1,4 @@
-# Attendance Management System
+# Online Attendance Management System
 
 This application represents attendance management system.
 
